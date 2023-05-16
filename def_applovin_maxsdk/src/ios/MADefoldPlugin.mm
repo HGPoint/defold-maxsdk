@@ -340,7 +340,7 @@ static const int EVENT_SIZE_UPDATE = 14;
              @"creativeIdentifier" : ad.creativeIdentifier ?: @"",
              @"ad_network" : ad.networkName,
              @"placement" : ad.placement ?: @"",
-             @"revenue" : ad.revenue == 0 ? @(ad.revenue) : @(-1)};
+             @"revenue" : ad.revenue ?: 0};
 }
 
 - (NSDictionary<NSString *, id> *)errorInfoForError:(MAError *)error
