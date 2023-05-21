@@ -26,6 +26,21 @@ typedef void(*DefoldEventCallback)(int messageId, NSString *body);
 - (void)showRewardedAdWithAdUnitIdentifier:(NSString *)adUnitIdentifier placement:(NSString *)placement;
 - (void)setRewardedAdExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable NSString *)value;
 
+#pragma mark - Banners
+
+- (void)createBannerWithAdUnitIdentifier:(NSString *)adUnitIdentifier atPosition:(NSString *)bannerPosition;
+- (void)setBannerBackgroundColorForAdUnitIdentifier:(NSString *)adUnitIdentifier hexColorCode:(NSString *)hexColorCode;
+- (void)setBannerPlacement:(nullable NSString *)placement forAdUnitIdentifier:(NSString *)adUnitIdentifier;
+- (void)updateBannerPosition:(NSString *)bannerPosition forAdUnitIdentifier:(NSString *)adUnitIdentifier;
+- (void)showBannerWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
+- (void)hideBannerWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
+- (void)destroyBannerWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
+- (void)showAnyBannerAd;
+- (void)hideAllBannerAds;
+- (void)destroyAllBannerAds;
+- (BOOL)isAnyBannerAdLoaded;
+- (BOOL)isAnyBannerAdShown;
+
 @end
 
 NS_ASSUME_NONNULL_END
