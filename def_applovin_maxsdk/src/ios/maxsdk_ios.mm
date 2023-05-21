@@ -97,12 +97,24 @@ bool IsRewardedLoaded(const char* unitId){
     [PluginInstance isRewardedAdReadyWithAdUnitIdentifier:[[NSString alloc] initWithUTF8String: unitId]];
 }
 
-void LoadBanner(const char* unitId, const char* amazonSlotID, BannerSize bannerSize){}
-void DestroyBanner(){}
-void ShowBanner(BannerPosition bannerPos, const char* placement){}
-void HideBanner(){}
-bool IsBannerLoaded(){return false;}
-bool IsBannerShown(){return false;}
+void LoadBanner(const char* unitId, const char* amazonSlotID, BannerSize bannerSize){
+    [PluginInstance createBannerWithAdUnitIdentifier:[[NSString alloc] initWithUTF8String: unitId] atPosition:@"bottom_center"];
+}
+void DestroyBanner(){
+    [PluginInstance destroyAllBannerAds];
+}
+void ShowBanner(BannerPosition bannerPos, const char* placement){
+    [PluginInstance showAnyBannerAd];
+}
+void HideBanner(){
+    [PluginInstance hideAllBannerAds];
+}
+bool IsBannerLoaded(){
+        return [PluginInstance isAnyBannerAdLoaded];
+}
+bool IsBannerShown(){
+        return [PluginInstance isAnyBannerAdShown];
+}
 
 } //namespace dmAppLovinMax
 #endif
