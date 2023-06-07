@@ -73,7 +73,7 @@ static const int EVENT_SIZE_UPDATE = 14;
         self.eventCallback = eventCallback;
         self.sdk = [ALSdk shared];
         self.sdk.mediationProvider = ALMediationProviderMAX;
-        self.mainView = dmGraphics::GetNativeiOSUIWindow();
+        self.mainView = dmGraphics::GetNativeiOSUIView();
 
         dispatchOnMainQueue(^{
             self.safeAreaBackground = [[UIView alloc] init];
@@ -575,6 +575,8 @@ static const int EVENT_SIZE_UPDATE = 14;
         self.safeAreaBackground.hidden = YES;
         
         [view stopAutoRefresh];
+
+        [self sendDefoldEvent: MSG_BANNER event_id: EVENT_SIZE_UPDATE parameters: @{@"x": @(0), @"y": @(0)}];
     });
 }
 
@@ -630,7 +632,7 @@ static const int EVENT_SIZE_UPDATE = 14;
     MAAdView *adView = [self retrieveAdViewForAdUnitIdentifier: adUnitIdentifier adFormat: adFormat];
     NSString *adViewPosition = self.adViewPositions[adUnitIdentifier];
     
-    UIView *superview = adView.superview;
+    UIView *superview = self.mainView;
     if ( !superview ) return;
     
     // Deactivate any previous constraints so that the banner can be positioned again.
@@ -655,6 +657,13 @@ static const int EVENT_SIZE_UPDATE = 14;
     // All positions have constant height
     NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray arrayWithObject: [adView.heightAnchor constraintEqualToConstant: adViewSize.height]];
     
+    UIEdgeInsets safeAreaInsets = superview.safeAreaInsets;
+    CGFloat bottomInset = safeAreaInsets.bottom;
+    
+    if (UIApplication.sharedApplication.keyWindow.safeAreaInsets.bottom > 0) {
+        bottomInset -= UIApplication.sharedApplication.keyWindow.safeAreaInsets.bottom;
+    }
+
     UILayoutGuide *layoutGuide;
     if ( @available(iOS 11.0, *) )
     {
@@ -684,7 +693,7 @@ static const int EVENT_SIZE_UPDATE = 14;
             }
             else // BottomCenter
             {
-                [constraints addObjectsFromArray: @[[adView.bottomAnchor constraintEqualToAnchor: layoutGuide.bottomAnchor],
+                [constraints addObjectsFromArray: @[[adView.bottomAnchor constraintEqualToAnchor: layoutGuide.bottomAnchor constant:-bottomInset],
                                                     [adView.leftAnchor constraintEqualToAnchor: superview.leftAnchor],
                                                     [adView.rightAnchor constraintEqualToAnchor: superview.rightAnchor]]];
                 [constraints addObjectsFromArray: @[[self.safeAreaBackground.topAnchor constraintEqualToAnchor: adView.bottomAnchor],
