@@ -26,6 +26,7 @@
 @property (nonatomic, strong, nullable) UIColor *publisherBannerBackgroundColor;
 
 @property (nonatomic, weak) UIWindow *mainView;
+@property (nonatomic, weak) UIWindow *mainSubView;
 
 @property (nonatomic, assign) DefoldEventCallback eventCallback;
 
@@ -74,15 +75,15 @@ static const int EVENT_SIZE_UPDATE = 14;
         self.sdk = [ALSdk shared];
         self.sdk.mediationProvider = ALMediationProviderMAX;
         self.mainView = dmGraphics::GetNativeiOSUIView();
+        self.mainSubView = dmGraphics::GetNativeiOSUIWindow();
 
-        dispatchOnMainQueue(^{
-            self.safeAreaBackground = [[UIView alloc] init];
-            self.safeAreaBackground.hidden = YES;
-            self.safeAreaBackground.backgroundColor = UIColor.clearColor;
-            self.safeAreaBackground.translatesAutoresizingMaskIntoConstraints = NO;
-            self.safeAreaBackground.userInteractionEnabled = NO;
-            [self.mainView addSubview: self.safeAreaBackground];
-        });
+        self.safeAreaBackground = [[UIView alloc] init];
+        self.safeAreaBackground.hidden = YES;
+        self.safeAreaBackground.backgroundColor = UIColor.clearColor;
+        self.safeAreaBackground.translatesAutoresizingMaskIntoConstraints = NO;
+        self.safeAreaBackground.userInteractionEnabled = NO;
+        [self.mainSubView addSubview: self.safeAreaBackground];
+
 
         [self.sdk setPluginVersion: @"defold-maxsdk"];
         [self.sdk initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
@@ -576,7 +577,6 @@ static const int EVENT_SIZE_UPDATE = 14;
         
         [view stopAutoRefresh];
 
-        [self sendDefoldEvent: MSG_BANNER event_id: EVENT_SIZE_UPDATE parameters: @{@"x": @(0), @"y": @(0)}];
     });
 }
 
@@ -616,7 +616,7 @@ static const int EVENT_SIZE_UPDATE = 14;
         self.adViews[adUnitIdentifier] = result;
         
         self.adViewPositions[adUnitIdentifier] = adViewPosition;
-        [self.mainView addSubview: result];
+        [self.mainSubView addSubview: result];
     }
     
     return result;
