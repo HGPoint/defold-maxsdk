@@ -70,6 +70,7 @@ public class AppLovinMaxJNI {
     private static final int EVENT_COLLAPSED = 12;
     private static final int EVENT_REVENUE_PAID = 13;
     private static final int EVENT_SIZE_UPDATE = 14;
+    private static final int EVENT_FAILED_TO_LOAD_WATERFALL = 15;
 
     // duplicate of enums from maxsdk_private.h:
     private static final int SIZE_BANNER = 0;
@@ -307,6 +308,7 @@ public class AppLovinMaxJNI {
         maxsdkAddToQueue(msg, message);
     }
 
+
     private void sendFailedToLoadMessage(int msg, String adUnitId, MaxError maxError) {
         String message;
         try {
@@ -314,24 +316,32 @@ public class AppLovinMaxJNI {
             obj.put(MSG_KEY_EVENT, EVENT_FAILED_TO_LOAD);
             obj.put(MSG_KEY_CODE, maxError.getCode());
             obj.put(MSG_KEY_ERROR, getErrorMessage(adUnitId, maxError));
-            MaxAdWaterfallInfo waterfall = maxError.getWaterfall();
-            if (waterfall != null) {
-                for (MaxNetworkResponseInfo networkResponse : waterfall.getNetworkResponses()) {
-                    MaxMediatedNetworkInfo network = networkResponse.getMediatedNetwork();
-                    if (network != null) {
-                        String name = network.getName();
-                        if (name == null && !name.isEmpty()) {
-                            obj.put(MSG_KEY_AD_NETWORK, name);
-                            break;
-                        }
-                    }
-                }
-            }
             message = obj.toString();
         } catch (JSONException e) {
             message = getJsonConversionErrorMessage(e.getMessage());
         }
         maxsdkAddToQueue(msg, message);
+
+        MaxAdWaterfallInfo waterfall = maxError.getWaterfall();
+        if (waterfall != null) {
+            for (MaxNetworkResponseInfo networkResponse : waterfall.getNetworkResponses()) {
+                MaxMediatedNetworkInfo network = networkResponse.getMediatedNetwork();
+                if (network != null) {
+                    String waterfall_message;
+                    try {
+                        JSONObject obj = new JSONObject();
+                        obj.put(MSG_KEY_EVENT, EVENT_FAILED_TO_LOAD_WATERFALL);
+                        obj.put(MSG_KEY_CODE, networkResponse.getError().getCode());
+                        obj.put(MSG_KEY_ERROR, getErrorMessage(adUnitId, maxError));
+                        obj.put(MSG_KEY_AD_NETWORK, network.getName());
+                        waterfall_message = obj.toString();
+                    } catch (JSONException e) {
+                        waterfall_message = getJsonConversionErrorMessage(e.getMessage());
+                    }
+                    maxsdkAddToQueue(msg, waterfall_message);
+                }
+            }
+        }
     }
 
     private void sendSimpleMessage(int msg, int eventId) {

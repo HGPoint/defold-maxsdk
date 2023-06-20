@@ -32,6 +32,7 @@ enum MessageEvent
     EVENT_COLLAPSED =               12,
     EVENT_REVENUE_PAID =            13,
     EVENT_SIZE_UPDATE =             14,
+    EVENT_FAILED_TO_LOAD_WATERFALL = 15,
 };
 
 struct CallbackData

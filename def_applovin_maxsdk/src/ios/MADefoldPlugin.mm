@@ -56,6 +56,7 @@ static const int EVENT_EXPANDED = 11;
 static const int EVENT_COLLAPSED = 12;
 static const int EVENT_REVENUE_PAID = 13;
 static const int EVENT_SIZE_UPDATE = 14;
+static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
 
 #pragma mark - Initialization
 
@@ -294,6 +295,22 @@ static const int EVENT_SIZE_UPDATE = 14;
     parameters[@"adUnitIdentifier"] = adUnitIdentifier;
     
     [self sendDefoldEvent: type event_id: EVENT_FAILED_TO_LOAD parameters: parameters];
+
+
+    if (!error.waterfall) {
+        return;
+    }
+
+    MAAdWaterfallInfo *waterfall = error.waterfall;
+    for (MANetworkResponseInfo *networkResponse in waterfall.networkResponses)
+    {
+        if (networkResponse.error) {
+
+            NSMutableDictionary *waterfall_parameters = [[self errorInfoForResponse: networkResponse] mutableCopy];
+            waterfall_parameters[@"adUnitIdentifier"] = adUnitIdentifier;       
+            [self sendDefoldEvent: type event_id: EVENT_FAILED_TO_LOAD_WATERFALL parameters: waterfall_parameters];
+        }
+    }
 }
 
 - (void)didClickAd:(MAAd *)ad
@@ -882,6 +899,17 @@ static const int EVENT_SIZE_UPDATE = 14;
     return @{@"code" : @(error.code),
              @"error" : error.message ?: @"",
              @"waterfall" : error.waterfall.description ?: @""};
+}
+
+- (NSDictionary<NSString *, id> *)errorInfoForResponse:(MANetworkResponseInfo *)networkResponse
+{
+    NSDictionary<NSString *, id> *dict = @{
+        @"ad_network" : networkResponse.mediatedNetwork
+    };
+    if (networkResponse.error) {
+        dict[@"code"] = networkResponse.error.code;    
+    }
+    return dict;
 }
 
 #pragma mark - Defold Bridge
