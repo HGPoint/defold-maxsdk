@@ -907,7 +907,7 @@ static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
         @"ad_network" : networkResponse.mediatedNetwork
     };
     if (networkResponse.error) {
-        dict[@"code"] = networkResponse.error.code;    
+        dict[@"code"] = @(networkResponse.error.code);
     }
     return dict;
 }
