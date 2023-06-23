@@ -901,14 +901,14 @@ static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
              @"waterfall" : error.waterfall.description ?: @""};
 }
 
-- (NSDictionary<NSString *, id> *)errorInfoForResponse:(MANetworkResponseInfo *)networkResponse
-{
-    NSDictionary<NSString *, id> *dict = @{
-        @"ad_network" : networkResponse.mediatedNetwork
-    };
+- (NSDictionary<NSString *, id> *)errorInfoForResponse:(MANetworkResponseInfo *)networkResponse {
+    NSMutableDictionary<NSString *, id> *dict = [NSMutableDictionary dictionary];
+    dict[@"ad_network"] = networkResponse.mediatedNetwork;
+    
     if (networkResponse.error) {
         dict[@"code"] = @(networkResponse.error.code);
     }
+
     return dict;
 }
 
