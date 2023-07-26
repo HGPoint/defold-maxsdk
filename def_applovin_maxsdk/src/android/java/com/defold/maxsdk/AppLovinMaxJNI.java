@@ -85,17 +85,19 @@ public class AppLovinMaxJNI {
     private static final int POS_BOTTOM_CENTER = 5;
     private static final int POS_BOTTOM_RIGHT = 6;
     private static final int POS_CENTER = 7;
-    
-    
+
+
     private static final String MSG_KEY_EVENT = "event";
     private static final String MSG_KEY_AD_NETWORK = "ad_network";
     private static final String MSG_KEY_REVENUE = "revenue";
     private static final String MSG_KEY_AD_UNIT_ID = "ad_unit_id";
+    private static final String MSG_KEY_PLACEMENT = "placement";
+    private static final String MSG_KEY_AD_NETWORK_PLACEMENT = "ad_network_placement";
     private static final String MSG_KEY_CODE = "code";
     private static final String MSG_KEY_ERROR = "error";
     private static final String MSG_KEY_X_POS = "x";
     private static final String MSG_KEY_Y_POS = "y";
-    
+
     // END CONSTANTS
 
     // Fullscreen Ad Fields
@@ -284,6 +286,8 @@ public class AppLovinMaxJNI {
             obj.put(MSG_KEY_AD_NETWORK, ad.getNetworkName());
             obj.put(MSG_KEY_REVENUE, ad.getRevenue());
             obj.put(MSG_KEY_AD_UNIT_ID, ad.getAdUnitId());
+            obj.put(MSG_KEY_PLACEMENT, ad.getPlacement());
+            obj.put(MSG_KEY_AD_NETWORK_PLACEMENT, ad.getNetworkPlacement());
             message = obj.toString();
         } catch (JSONException e) {
             message = getJsonConversionErrorMessage(e.getMessage());
@@ -301,6 +305,8 @@ public class AppLovinMaxJNI {
             obj.put(MSG_KEY_AD_UNIT_ID, ad.getAdUnitId());
             obj.put(MSG_KEY_CODE, maxError.getCode());
             obj.put(MSG_KEY_ERROR, getErrorMessage(ad, maxError));
+            obj.put(MSG_KEY_PLACEMENT, ad.getPlacement());
+            obj.put(MSG_KEY_AD_NETWORK_PLACEMENT, ad.getNetworkPlacement());
             message = obj.toString();
         } catch (JSONException e) {
             message = getJsonConversionErrorMessage(e.getMessage());
