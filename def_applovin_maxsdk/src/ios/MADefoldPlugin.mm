@@ -26,6 +26,7 @@
 @property (nonatomic, strong, nullable) UIColor *publisherBannerBackgroundColor;
 
 @property (nonatomic, weak) UIWindow *mainView;
+@property (nonatomic, weak) UIWindow *mainSubView;
 
 @property (nonatomic, assign) DefoldEventCallback eventCallback;
 
@@ -55,6 +56,7 @@ static const int EVENT_EXPANDED = 11;
 static const int EVENT_COLLAPSED = 12;
 static const int EVENT_REVENUE_PAID = 13;
 static const int EVENT_SIZE_UPDATE = 14;
+static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
 
 #pragma mark - Initialization
 
@@ -74,15 +76,15 @@ static const int EVENT_SIZE_UPDATE = 14;
         self.sdk = [ALSdk shared];
         self.sdk.mediationProvider = ALMediationProviderMAX;
         self.mainView = dmGraphics::GetNativeiOSUIView();
+        self.mainSubView = dmGraphics::GetNativeiOSUIWindow();
 
-        dispatchOnMainQueue(^{
-            self.safeAreaBackground = [[UIView alloc] init];
-            self.safeAreaBackground.hidden = YES;
-            self.safeAreaBackground.backgroundColor = UIColor.clearColor;
-            self.safeAreaBackground.translatesAutoresizingMaskIntoConstraints = NO;
-            self.safeAreaBackground.userInteractionEnabled = NO;
-            [self.mainView addSubview: self.safeAreaBackground];
-        });
+        self.safeAreaBackground = [[UIView alloc] init];
+        self.safeAreaBackground.hidden = YES;
+        self.safeAreaBackground.backgroundColor = UIColor.clearColor;
+        self.safeAreaBackground.translatesAutoresizingMaskIntoConstraints = NO;
+        self.safeAreaBackground.userInteractionEnabled = NO;
+        [self.mainSubView addSubview: self.safeAreaBackground];
+
 
         [self.sdk setPluginVersion: @"defold-maxsdk"];
         [self.sdk initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
@@ -293,6 +295,22 @@ static const int EVENT_SIZE_UPDATE = 14;
     parameters[@"adUnitIdentifier"] = adUnitIdentifier;
     
     [self sendDefoldEvent: type event_id: EVENT_FAILED_TO_LOAD parameters: parameters];
+
+
+    if (!error.waterfall) {
+        return;
+    }
+
+    MAAdWaterfallInfo *waterfall = error.waterfall;
+    for (MANetworkResponseInfo *networkResponse in waterfall.networkResponses)
+    {
+        if (networkResponse.error) {
+
+            NSMutableDictionary *waterfall_parameters = [[self errorInfoForResponse: networkResponse] mutableCopy];
+            waterfall_parameters[@"adUnitIdentifier"] = adUnitIdentifier;       
+            [self sendDefoldEvent: type event_id: EVENT_FAILED_TO_LOAD_WATERFALL parameters: waterfall_parameters];
+        }
+    }
 }
 
 - (void)didClickAd:(MAAd *)ad
@@ -576,7 +594,6 @@ static const int EVENT_SIZE_UPDATE = 14;
         
         [view stopAutoRefresh];
 
-        [self sendDefoldEvent: MSG_BANNER event_id: EVENT_SIZE_UPDATE parameters: @{@"x": @(0), @"y": @(0)}];
     });
 }
 
@@ -616,7 +633,7 @@ static const int EVENT_SIZE_UPDATE = 14;
         self.adViews[adUnitIdentifier] = result;
         
         self.adViewPositions[adUnitIdentifier] = adViewPosition;
-        [self.mainView addSubview: result];
+        [self.mainSubView addSubview: result];
     }
     
     return result;
@@ -882,6 +899,17 @@ static const int EVENT_SIZE_UPDATE = 14;
     return @{@"code" : @(error.code),
              @"error" : error.message ?: @"",
              @"waterfall" : error.waterfall.description ?: @""};
+}
+
+- (NSDictionary<NSString *, id> *)errorInfoForResponse:(MANetworkResponseInfo *)networkResponse {
+    NSMutableDictionary<NSString *, id> *dict = [NSMutableDictionary dictionary];
+    dict[@"ad_network"] = networkResponse.mediatedNetwork;
+    
+    if (networkResponse.error) {
+        dict[@"code"] = @(networkResponse.error.code);
+    }
+
+    return dict;
 }
 
 #pragma mark - Defold Bridge
