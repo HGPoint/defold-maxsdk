@@ -5,45 +5,51 @@ repositories {
     maven { url "https://imobile-maio.github.io/maven" }
     maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
     maven { url "https://maven.ogury.co" }
+    maven { url "https://cboost.jfrog.io/artifactory/chartboost-ads/" }
 }
 
 dependencies {
     // https://dash.applovin.com/documentation/mediation/android/getting-started/integration
     // https://search.maven.org/search?q=g:com.applovin.mediation
 
+    // charboost
+    implementation 'com.google.android.gms:play-services-base:16.1.0'
     // mintegral, inmobi
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     // inmobi
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation 'com.applovin:applovin-sdk:11.10.1'
+    implementation 'com.applovin:applovin-sdk:11.11.2'
 
-    implementation 'com.applovin.mediation:facebook-adapter:6.14.0.0'
+    implementation 'com.applovin.mediation:facebook-adapter:6.15.0.0'
 
-    implementation 'com.applovin.mediation:google-ad-manager-adapter:22.1.0.2'
+    implementation 'com.applovin.mediation:google-ad-manager-adapter:22.2.0.1'
 
-    implementation 'com.applovin.mediation:google-adapter:22.1.0.3'
+    implementation 'com.applovin.mediation:google-adapter:22.2.0.1'
 
-    implementation 'com.applovin.mediation:ironsource-adapter:7.3.1.0.0'
+    implementation 'com.applovin.mediation:ironsource-adapter:7.4.0.0.0'
 
-    implementation 'com.applovin.mediation:unityads-adapter:4.7.1.0'
+    implementation 'com.applovin.mediation:unityads-adapter:4.8.0.0'
 
     implementation 'com.applovin.mediation:vungle-adapter:6.12.1.1' //Liftoff Monetize *
 
-    implementation 'com.applovin.mediation:mintegral-adapter:16.4.61.0'
+    implementation 'com.applovin.mediation:mintegral-adapter:16.4.81.0'
 
-    implementation 'com.applovin.mediation:inmobi-adapter:10.1.4.1'
+    implementation 'com.applovin.mediation:inmobi-adapter:10.1.4.3'
 
     implementation 'com.applovin.mediation:adcolony-adapter:4.8.0.4'
 
     implementation 'com.applovin.mediation:maio-adapter:1.1.16.2'
 
-    implementation 'com.applovin.mediation:mytarget-adapter:5.16.5.0'
+    implementation 'com.applovin.mediation:mytarget-adapter:5.18.0.0'
 
     implementation 'com.applovin.mediation:fyber-adapter:8.2.3.3'
 
-    implementation 'com.applovin.mediation:ogury-presage-adapter:5.5.0.2'
+    implementation 'com.applovin.mediation:ogury-presage-adapter:5.6.0.0'
 
-    implementation 'com.applovin.mediation:amazon-tam-adapter:9.8.2.0'
-    implementation 'com.amazon.android:aps-sdk:9.8.2'
+    implementation 'com.applovin.mediation:amazon-tam-adapter:9.8.4.0'
+    implementation 'com.amazon.android:aps-sdk:9.8.4'
+
+
+    implementation 'com.applovin.mediation:chartboost-adapter:9.4.0.0'
 }
