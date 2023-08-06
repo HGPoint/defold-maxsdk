@@ -9,7 +9,7 @@
 
 // Parent Fields
 @property (nonatomic, weak) ALSdk *sdk;
-
+@property (nonatomic, strong) UIWindow *window;
 
 // Fullscreen Ad Fields
 @property (nonatomic, strong) NSMutableDictionary<NSString *, MAInterstitialAd *> *interstitials;
@@ -60,7 +60,7 @@ static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
 
 #pragma mark - Initialization
 
-- (instancetype)init:(DefoldEventCallback)eventCallback
+- (instancetype)init:(DefoldEventCallback)eventCallback amazonAppId:(NSString *)amazonAppId;
 {
     self = [super init];
     if ( self )
@@ -77,6 +77,7 @@ static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
         self.sdk.mediationProvider = ALMediationProviderMAX;
         self.mainView = dmGraphics::GetNativeiOSUIView();
         self.mainSubView = dmGraphics::GetNativeiOSUIWindow();
+        self.window = self.mainSubView;
 
         self.safeAreaBackground = [[UIView alloc] init];
         self.safeAreaBackground.hidden = YES;
@@ -91,6 +92,11 @@ static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
             // Start loading ads
             [self sendDefoldEvent: MSG_INITIALIZATION event_id: EVENT_COMPLETE parameters: @{@"plugin":@"defold-maxsdk"}];
         }];
+        [[DTBAds sharedInstance] setAppKey: amazonAppId];
+        DTBAdNetworkInfo *adNetworkInfo = [[DTBAdNetworkInfo alloc] initWithNetworkName: DTBADNETWORK_MAX];
+        [DTBAds sharedInstance].mraidCustomVersions = @[@"1.0", @"2.0", @"3.0"];
+        [[DTBAds sharedInstance] setAdNetworkInfo: adNetworkInfo];
+        [DTBAds sharedInstance].mraidPolicy = CUSTOM_MRAID;
     }
     return self;
 }

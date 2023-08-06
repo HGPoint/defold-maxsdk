@@ -20,9 +20,11 @@ void OnActivateApp(){}
 void OnDeactivateApp(){}
 
 
-void Initialize(const char* amazonAppId){
-    PluginInstance = [[MADefoldPlugin alloc] init:&ForwardIOSEvent];
+void Initialize(const char* amazonAppId) {
+    NSString* appIdString = [NSString stringWithUTF8String:amazonAppId];
+    PluginInstance = [[MADefoldPlugin alloc] init:&ForwardIOSEvent amazonAppId:appIdString];
 }
+
 void SetMuted(bool muted){
     if(muted){
         [ALSdk shared].settings.muted = YES;

@@ -6,6 +6,7 @@ repositories {
     maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
     maven { url "https://maven.ogury.co" }
     maven { url "https://cboost.jfrog.io/artifactory/chartboost-ads/" }
+    maven { url "https://artifact.bytedance.com/repository/pangle" }
 }
 
 dependencies {
@@ -49,6 +50,8 @@ dependencies {
 
     implementation 'com.applovin.mediation:amazon-tam-adapter:9.8.4.0'
     implementation 'com.amazon.android:aps-sdk:9.8.4'
+    
+    implementation 'com.applovin.mediation:bytedance-adapter:5.3.0.4.0' //Pangle
 
 
     implementation 'com.applovin.mediation:chartboost-adapter:9.4.0.0'
