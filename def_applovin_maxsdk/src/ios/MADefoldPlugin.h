@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <AppLovinSDK/AppLovinSDK.h>
+#import <DTBiOSSDK/DTBiOSSDK.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -9,7 +10,7 @@ typedef void(*DefoldEventCallback)(int messageId, NSString *body);
 
 #pragma mark - Initialization
 
-- (instancetype)init:(DefoldEventCallback)eventCallback;
+- (instancetype)init:(DefoldEventCallback)eventCallback amazonAppId:(NSString *)amazonAppId;
 
 
 #pragma mark - Interstitials
