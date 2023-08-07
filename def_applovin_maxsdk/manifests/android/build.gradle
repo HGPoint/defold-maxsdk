@@ -1,12 +1,27 @@
 repositories {
     google()
     mavenCentral()
+
+{{#applovin.IronSourceAdapter}}
     maven { url "https://android-sdk.is.com" }
+{{/applovin.IronSourceAdapter}}
+
+{{#applovin.MaioAdapter}}
     maven { url "https://imobile-maio.github.io/maven" }
+{{/applovin.MaioAdapter}}
+
+{{#applovin.MintegralAdapter}}
     maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
+{{/applovin.MintegralAdapter}}
+{{#applovin.OguryPresageAdapter}}
     maven { url "https://maven.ogury.co" }
+{{/applovin.OguryPresageAdapter}}
+{{#applovin.ChartboostAdapter}}
     maven { url "https://cboost.jfrog.io/artifactory/chartboost-ads/" }
+{{/applovin.ChartboostAdapter}}
+{{#applovin.ByteDanceAdapter}}
     maven { url "https://artifact.bytedance.com/repository/pangle" }
+{{/applovin.ByteDanceAdapter}}
 }
 
 dependencies {
@@ -22,37 +37,53 @@ dependencies {
 
     implementation 'com.applovin:applovin-sdk:11.11.2'
 
-    implementation 'com.applovin.mediation:facebook-adapter:6.15.0.0'
-
-    implementation 'com.applovin.mediation:google-ad-manager-adapter:22.2.0.1'
-
-    implementation 'com.applovin.mediation:google-adapter:22.2.0.1'
-
-    implementation 'com.applovin.mediation:ironsource-adapter:7.4.0.0.0'
-
-    implementation 'com.applovin.mediation:unityads-adapter:4.8.0.0'
-
-    implementation 'com.applovin.mediation:vungle-adapter:6.12.1.1' //Liftoff Monetize *
-
-    implementation 'com.applovin.mediation:mintegral-adapter:16.4.81.0'
-
-    implementation 'com.applovin.mediation:inmobi-adapter:10.1.4.3'
-
-    implementation 'com.applovin.mediation:adcolony-adapter:4.8.0.4'
-
-    implementation 'com.applovin.mediation:maio-adapter:1.1.16.2'
-
-    implementation 'com.applovin.mediation:mytarget-adapter:5.18.0.0'
-
-    implementation 'com.applovin.mediation:fyber-adapter:8.2.3.3'
-
-    implementation 'com.applovin.mediation:ogury-presage-adapter:5.6.0.0'
-
     implementation 'com.applovin.mediation:amazon-tam-adapter:9.8.4.0'
     implementation 'com.amazon.android:aps-sdk:9.8.4'
-    
-    implementation 'com.applovin.mediation:bytedance-adapter:5.3.0.4.0' //Pangle
 
 
+{{#applovin.FacebookAdapter}}
+    implementation 'com.applovin.mediation:facebook-adapter:6.15.0.0'
+{{/applovin.FacebookAdapter}}
+{{#applovin.MintegralAdapter}}
+    implementation 'com.applovin.mediation:mintegral-adapter:16.4.81.0'
+{{/applovin.MintegralAdapter}}
+{{#applovin.AdColonyAdapter}}
+    implementation 'com.applovin.mediation:adcolony-adapter:4.8.0.4'
+{{/applovin.AdColonyAdapter}}
+{{#applovin.InMobiAdapter}}
+    implementation 'com.applovin.mediation:inmobi-adapter:10.1.4.3'
+{{/applovin.InMobiAdapter}}
+{{#applovin.IronSourceAdapter}}
+    implementation 'com.applovin.mediation:ironsource-adapter:7.4.0.0.0'
+{{/applovin.IronSourceAdapter}}
+{{#applovin.VungleAdapter}}
+    implementation 'com.applovin.mediation:vungle-adapter:6.12.1.1' //Liftoff Monetize *
+{{/applovin.VungleAdapter}}
+{{#applovin.MaioAdapter}}
+    implementation 'com.applovin.mediation:maio-adapter:1.1.16.2'
+{{/applovin.MaioAdapter}}
+{{#applovin.MyTargetAdapter}}
+    implementation 'com.applovin.mediation:mytarget-adapter:5.18.0.0'
+{{/applovin.MyTargetAdapter}}
+{{#applovin.UnityAdsAdapter}}
+    implementation 'com.applovin.mediation:unityads-adapter:4.8.0.0'
+{{/applovin.UnityAdsAdapter}}
+{{#applovin.OguryPresageAdapter}}
+    implementation 'com.applovin.mediation:ogury-presage-adapter:5.6.0.0'
+{{/applovin.OguryPresageAdapter}}
+{{#applovin.FyberAdapter}}
+    implementation 'com.applovin.mediation:fyber-adapter:8.2.3.3'
+{{/applovin.FyberAdapter}}
+{{#applovin.GoogleAdManagerAdapter}}
+    implementation 'com.applovin.mediation:google-ad-manager-adapter:22.2.0.1'
+{{/applovin.GoogleAdManagerAdapter}}
+{{#applovin.GoogleAdapter}}
+    implementation 'com.applovin.mediation:google-adapter:22.2.0.1'
+{{/applovin.GoogleAdapter}}
+{{#applovin.ChartboostAdapter}}
     implementation 'com.applovin.mediation:chartboost-adapter:9.4.0.0'
+{{/applovin.ChartboostAdapter}}
+{{#applovin.ByteDanceAdapter}}
+    implementation 'com.applovin.mediation:bytedance-adapter:5.3.0.4.0' //Pangle
+{{/applovin.ByteDanceAdapter}}
 }

@@ -8,10 +8,14 @@
 	</dict>
 	<key>AppLovinSdkKey</key>
 	<string>{{applovin.sdk_key_ios}}</string>
-	<key>GADApplicationIdentifier</key>
-	<string>{{admob.app_id}}</string>
-	<key>GADIsAdManagerApp</key>
-	<true/>
+    {{#applovin.GoogleAdManagerAdapter}}
+        <key>GADIsAdManagerApp</key>
+        <true/>
+    {{/applovin.GoogleAdManagerAdapter}}
+    {{#applovin.GoogleAdapter}}
+        <key>GADApplicationIdentifier</key>
+        <string>{{admob.app_id}}</string>
+    {{/applovin.GoogleAdapter}}
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

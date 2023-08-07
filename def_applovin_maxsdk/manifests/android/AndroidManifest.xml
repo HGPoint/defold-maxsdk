@@ -7,12 +7,17 @@
         <meta-data
             android:name="applovin.sdk.key"
             android:value="{{applovin.sdk_key_android}}"/>
-        <meta-data
-                android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="{{admob.app_id}}"/>
+
+{{#applovin.GoogleAdManagerAdapter}}
         <meta-data
                 android:name="com.google.android.gms.ads.AD_MANAGER_APP"
                 android:value="true"/>
+{{/applovin.GoogleAdManagerAdapter}}
+{{#applovin.GoogleAdapter}}
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="{{admob.app_id}}"/>
+{{/applovin.GoogleAdapter}}
     </application>
     
 </manifest>
