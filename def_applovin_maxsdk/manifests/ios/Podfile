@@ -49,3 +49,6 @@ pod 'AppLovinMediationChartboostAdapter', '9.4.0.0'
 {{#applovin.ByteDanceAdapter}}
 pod 'AppLovinMediationByteDanceAdapter', '5.3.1.2.0' 
 {{/applovin.ByteDanceAdapter}}
+{{#applovin.BidMachineAdapter}}
+pod 'AppLovinMediationBidMachineAdapter', '2.3.0.0.0'
+{{/applovin.BidMachineAdapter}}
