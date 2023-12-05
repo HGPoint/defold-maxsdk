@@ -42,7 +42,7 @@ dependencies {
     // inmobi
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation 'com.applovin:applovin-sdk:12.0.0'
+    implementation 'com.applovin:applovin-sdk:12.1.0'
 
     implementation 'com.applovin.mediation:amazon-tam-adapter:9.8.8.0'
     implementation 'com.amazon.android:aps-sdk:9.8.4'
@@ -52,7 +52,7 @@ dependencies {
     implementation 'com.applovin.mediation:facebook-adapter:6.16.0.2'
 {{/applovin.FacebookAdapter}}
 {{#applovin.MintegralAdapter}}
-    implementation 'com.applovin.mediation:mintegral-adapter:16.5.51.0'
+    implementation 'com.applovin.mediation:mintegral-adapter:16.5.71.0'
 {{/applovin.MintegralAdapter}}
 {{#applovin.AdColonyAdapter}}
     implementation 'com.applovin.mediation:adcolony-adapter:4.8.0.4'
@@ -61,10 +61,10 @@ dependencies {
     implementation 'com.applovin.mediation:inmobi-adapter:10.6.2.0'
 {{/applovin.InMobiAdapter}}
 {{#applovin.IronSourceAdapter}}
-    implementation 'com.applovin.mediation:ironsource-adapter:7.5.2.0.0'
+    implementation 'com.applovin.mediation:ironsource-adapter:7.6.0.0.0'
 {{/applovin.IronSourceAdapter}}
 {{#applovin.VungleAdapter}}
-    implementation 'com.applovin.mediation:vungle-adapter:7.0.0.0' //Liftoff Monetize *
+    implementation 'com.applovin.mediation:vungle-adapter:7.1.0.0' //Liftoff Monetize *
 {{/applovin.VungleAdapter}}
 {{#applovin.MaioAdapter}}
     implementation 'com.applovin.mediation:maio-adapter:1.1.16.2'
@@ -85,13 +85,13 @@ dependencies {
     implementation 'com.applovin.mediation:google-ad-manager-adapter:22.5.0.0'
 {{/applovin.GoogleAdManagerAdapter}}
 {{#applovin.GoogleAdapter}}
-    implementation 'com.applovin.mediation:google-adapter:22.5.0.0'
+    implementation 'com.applovin.mediation:google-adapter:22.5.0.1'
 {{/applovin.GoogleAdapter}}
 {{#applovin.ChartboostAdapter}}
     implementation 'com.applovin.mediation:chartboost-adapter:9.5.0.0'
 {{/applovin.ChartboostAdapter}}
 {{#applovin.ByteDanceAdapter}}
-    implementation 'com.applovin.mediation:bytedance-adapter:5.6.0.1.0' //Pangle
+    implementation 'com.applovin.mediation:bytedance-adapter:5.6.0.2.0' //Pangle
 {{/applovin.ByteDanceAdapter}}
 {{#applovin.BidMachineAdapter}}
     implementation 'com.applovin.mediation:bidmachine-adapter:2.4.0.0'
