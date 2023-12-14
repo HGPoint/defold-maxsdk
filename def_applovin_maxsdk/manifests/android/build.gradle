@@ -52,7 +52,7 @@ dependencies {
     implementation 'com.applovin.mediation:facebook-adapter:6.16.0.2'
 {{/applovin.FacebookAdapter}}
 {{#applovin.MintegralAdapter}}
-    implementation 'com.applovin.mediation:mintegral-adapter:16.5.71.0'
+    implementation 'com.applovin.mediation:mintegral-adapter:16.5.91.0'
 {{/applovin.MintegralAdapter}}
 {{#applovin.AdColonyAdapter}}
     implementation 'com.applovin.mediation:adcolony-adapter:4.8.0.4'
@@ -73,7 +73,7 @@ dependencies {
     implementation 'com.applovin.mediation:mytarget-adapter:5.19.0.0'
 {{/applovin.MyTargetAdapter}}
 {{#applovin.UnityAdsAdapter}}
-    implementation 'com.applovin.mediation:unityads-adapter:4.9.2.0'
+    implementation 'com.applovin.mediation:unityads-adapter:4.9.2.1'
 {{/applovin.UnityAdsAdapter}}
 {{#applovin.OguryPresageAdapter}}
     implementation 'com.applovin.mediation:ogury-presage-adapter:5.6.2.0'
@@ -82,16 +82,16 @@ dependencies {
     implementation 'com.applovin.mediation:fyber-adapter:8.2.4.0'
 {{/applovin.FyberAdapter}}
 {{#applovin.GoogleAdManagerAdapter}}
-    implementation 'com.applovin.mediation:google-ad-manager-adapter:22.5.0.0'
+    implementation 'com.applovin.mediation:google-ad-manager-adapter:22.6.0.0'
 {{/applovin.GoogleAdManagerAdapter}}
 {{#applovin.GoogleAdapter}}
-    implementation 'com.applovin.mediation:google-adapter:22.5.0.1'
+    implementation 'com.applovin.mediation:google-adapter:22.6.0.0'
 {{/applovin.GoogleAdapter}}
 {{#applovin.ChartboostAdapter}}
-    implementation 'com.applovin.mediation:chartboost-adapter:9.5.0.0'
+    implementation 'com.applovin.mediation:chartboost-adapter:9.6.0.0'
 {{/applovin.ChartboostAdapter}}
 {{#applovin.ByteDanceAdapter}}
-    implementation 'com.applovin.mediation:bytedance-adapter:5.6.0.2.0' //Pangle
+    implementation 'com.applovin.mediation:bytedance-adapter:5.6.0.4.0' //Pangle
 {{/applovin.ByteDanceAdapter}}
 {{#applovin.BidMachineAdapter}}
     implementation 'com.applovin.mediation:bidmachine-adapter:2.4.0.0'
