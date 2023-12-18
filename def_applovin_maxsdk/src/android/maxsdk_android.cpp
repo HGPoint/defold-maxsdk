@@ -22,6 +22,7 @@ struct AppLovin
     jobject        m_AppLovinMaxJNI;
 
     jmethodID      m_Initialize;
+    jmethodID      m_ShowConsentFlow;
     jmethodID      m_OnActivateApp;
     jmethodID      m_OnDeactivateApp;
     jmethodID      m_SetMuted;
@@ -237,6 +238,7 @@ static void CallVoidMethodInt(jobject instance, jmethodID method, int cint)
 static void InitJNIMethods(JNIEnv* env, jclass cls)
 {
     g_maxsdk.m_Initialize             = env->GetMethodID(cls, "initialize", "(Ljava/lang/String;)V");
+    g_maxsdk.m_ShowConsentFlow        = env->GetMethodID(cls, "showConsentFlow", "()V");
     g_maxsdk.m_OnActivateApp          = env->GetMethodID(cls, "onActivateApp", "()V");
     g_maxsdk.m_OnDeactivateApp        = env->GetMethodID(cls, "onDeactivateApp", "()V");
     g_maxsdk.m_SetMuted               = env->GetMethodID(cls, "setMuted", "(Z)V");
@@ -288,6 +290,11 @@ void OnDeactivateApp()
 void Initialize(const char* amazonAppId)
 {
     CallVoidMethodChar(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_Initialize, amazonAppId);
+}
+
+void ShowConsentFlow()
+{
+    CallVoidMethod(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_ShowConsentFlow);
 }
 
 void SetMuted(bool muted)

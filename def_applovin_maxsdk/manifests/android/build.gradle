@@ -46,6 +46,7 @@ dependencies {
 
     implementation 'com.applovin.mediation:amazon-tam-adapter:9.8.8.0'
     implementation 'com.amazon.android:aps-sdk:9.8.4'
+    implementation 'com.google.android.ump:user-messaging-platform:2.1.0'
 
 
 {{#applovin.FacebookAdapter}}

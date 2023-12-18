@@ -26,6 +26,7 @@ void OnActivateApp();
 void OnDeactivateApp();
 
 void Initialize(const char* amazonAppId);
+void ShowConsentFlow();
 void SetMuted(bool muted);
 void SetVerboseLogging(bool verbose);
 void SetHasUserConsent(bool hasConsent);

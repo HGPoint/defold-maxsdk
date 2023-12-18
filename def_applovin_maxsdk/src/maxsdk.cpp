@@ -28,6 +28,13 @@ static int Lua_Initialize(lua_State* L)
     return 0;
 }
 
+static int Lua_ShowConsentFlow(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 0);
+    ShowConsentFlow();
+    return 0;
+}
+
 static int Lua_SetCallback(lua_State* L)
 {
     DM_LUA_STACK_CHECK(L, 0);
@@ -303,6 +310,7 @@ static int Lua_IsBannerShown(lua_State* L)
 static const luaL_reg Module_methods[] =
 {
     {"initialize", Lua_Initialize},
+    {"showConsentFlow", Lua_ShowConsentFlow},
     {"set_callback", Lua_SetCallback},
     {"set_muted", Lua_SetMuted},
     {"set_verbose_logging", Lua_SetVerboseLogging},

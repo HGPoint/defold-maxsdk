@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
@@ -26,6 +27,10 @@ import com.applovin.sdk.AppLovinMediationProvider;
 import com.applovin.sdk.AppLovinPrivacySettings;
 import com.applovin.sdk.AppLovinSdk;
 import com.applovin.sdk.AppLovinSdkUtils;
+import com.applovin.sdk.AppLovinSdkSettings;
+import com.applovin.sdk.AppLovinCmpService;
+import com.applovin.sdk.AppLovinCmpError;
+import com.applovin.sdk.AppLovinSdkConfiguration;
 
 import com.amazon.device.ads.AdError;
 import com.amazon.device.ads.AdRegistration;
@@ -88,6 +93,7 @@ public class AppLovinMaxJNI {
 
 
     private static final String MSG_KEY_EVENT = "event";
+    private static final String MSG_KEY_IS_USER_GDPR_REGION = "is_user_gdpr_region";
     private static final String MSG_KEY_AD_NETWORK = "ad_network";
     private static final String MSG_KEY_REVENUE = "revenue";
     private static final String MSG_KEY_AD_UNIT_ID = "ad_unit_id";
@@ -118,9 +124,34 @@ public class AppLovinMaxJNI {
         AdRegistration.setMRAIDSupportedVersions(new String[]{"1.0", "2.0", "3.0"});
         AdRegistration.setMRAIDPolicy(MRAIDPolicy.CUSTOM);
 
+        AppLovinSdkSettings sdkSettings = new AppLovinSdkSettings(mActivity);
+        sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setEnabled(true);
+        sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setPrivacyPolicyUri(Uri.parse("https://gameveterans.com/privacy-policy.html"));
+        sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setDebugUserGeography(AppLovinSdkConfiguration.ConsentFlowUserGeography.GDPR);
 
-        AppLovinSdk.getInstance(mActivity).setMediationProvider(AppLovinMediationProvider.MAX);
-        AppLovinSdk.getInstance(mActivity).initializeSdk(config -> sendSimpleMessage(MSG_INITIALIZATION, EVENT_COMPLETE));
+        AppLovinSdk sdk = AppLovinSdk.getInstance(sdkSettings, mActivity);
+        sdk.setMediationProvider(AppLovinMediationProvider.MAX);
+        sdk.initializeSdk(config -> {
+            Boolean isUserGdprRegion = false;
+
+            if (config.getConsentFlowUserGeography() == AppLovinSdkConfiguration.ConsentFlowUserGeography.GDPR) {
+                isUserGdprRegion = true;
+            }
+            sendSimpleMessage(MSG_INITIALIZATION, EVENT_COMPLETE, isUserGdprRegion);
+        });
+    }
+
+    public void showConsentFlow() {
+        AppLovinCmpService cmpService = AppLovinSdk.getInstance(mActivity).getCmpService();
+
+        cmpService.showCmpForExistingUser(mActivity, new AppLovinCmpService.OnCompletedListener() {
+            @Override
+            public void onCompleted(final AppLovinCmpError error) {
+                if (null == error) {
+                    // The CMP alert was shown successfully.
+                }
+            }
+        });
     }
 
     private MaxInterstitialAd retrieveInterstitial(String adUnitId) {
@@ -355,6 +386,19 @@ public class AppLovinMaxJNI {
         try {
             JSONObject obj = new JSONObject();
             obj.put(MSG_KEY_EVENT, eventId);
+            message = obj.toString();
+        } catch (JSONException e) {
+            message = getJsonConversionErrorMessage(e.getMessage());
+        }
+        maxsdkAddToQueue(msg, message);
+    }
+
+    private void sendSimpleMessage(int msg, int eventId, boolean isUserGdprRegion) {
+        String message;
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put(MSG_KEY_EVENT, eventId);
+            obj.put(MSG_KEY_IS_USER_GDPR_REGION, isUserGdprRegion);
             message = obj.toString();
         } catch (JSONException e) {
             message = getJsonConversionErrorMessage(e.getMessage());
