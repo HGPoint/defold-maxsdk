@@ -25,7 +25,7 @@ void Initialize_Ext();
 void OnActivateApp();
 void OnDeactivateApp();
 
-void Initialize(const char* amazonAppId);
+void Initialize(const char* amazonAppId, const char* privacyPolicyUrl, const char* userId);
 void ShowConsentFlow();
 void SetMuted(bool muted);
 void SetVerboseLogging(bool verbose);
@@ -47,6 +47,7 @@ void LoadBanner(const char* unitId, const char* amazonSlotID, BannerSize bannerS
 void DestroyBanner();
 void ShowBanner(BannerPosition bannerPos, const char* placement);
 void HideBanner();
+bool IsUserGdprRegion();
 bool IsBannerLoaded();
 bool IsBannerShown();
 

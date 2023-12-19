@@ -24,7 +24,21 @@ static int Lua_Initialize(lua_State* L)
         return 0;
     }
     const char* amazon_key = luaL_checkstring(L, 1);
-    Initialize(amazon_key);
+    if (lua_type(L, 2) != LUA_TSTRING) {
+        char msg[256];
+        snprintf(msg, sizeof(msg), "Expected string, got %s. Wrong type for privacy url '%s'.", luaL_typename(L, 2), lua_tostring(L, 2));
+        luaL_error(L, msg);
+        return 0;
+    }
+    const char* privacy_policy_url = luaL_checkstring(L, 2);
+    if (lua_type(L, 3) != LUA_TSTRING) {
+        char msg[256];
+        snprintf(msg, sizeof(msg), "Expected string, got %s. Wrong type for user id '%s'.", luaL_typename(L, 3), lua_tostring(L, 3));
+        luaL_error(L, msg);
+        return 0;
+    }
+    const char* user_id = luaL_checkstring(L, 3);
+    Initialize(amazon_key, privacy_policy_url, user_id);
     return 0;
 }
 
@@ -307,10 +321,19 @@ static int Lua_IsBannerShown(lua_State* L)
     return 1;
 }
 
+static int Lua_isUserGdprRegion(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 1);
+    bool is_user_gdpr_region = IsUserGdprRegion();
+    lua_pushboolean(L, is_user_gdpr_region);
+    return 1;
+}
+
 static const luaL_reg Module_methods[] =
 {
     {"initialize", Lua_Initialize},
-    {"showConsentFlow", Lua_ShowConsentFlow},
+    {"show_consent_flow", Lua_ShowConsentFlow},
+    {"is_user_gdpr_region", Lua_isUserGdprRegion},
     {"set_callback", Lua_SetCallback},
     {"set_muted", Lua_SetMuted},
     {"set_verbose_logging", Lua_SetVerboseLogging},

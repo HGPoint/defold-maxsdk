@@ -20,9 +20,11 @@ void OnActivateApp(){}
 void OnDeactivateApp(){}
 
 
-void Initialize(const char* amazonAppId) {
+void Initialize(const char* amazonAppId, const char* privacyPolicyUrl, const char* userId) {
     NSString* appIdString = [NSString stringWithUTF8String:amazonAppId];
-    PluginInstance = [[MADefoldPlugin alloc] init:&ForwardIOSEvent amazonAppId:appIdString];
+    NSString* policyUrlString = [NSString stringWithUTF8String:privacyPolicyUrl];
+    NSString* userIdString = [NSString stringWithUTF8String:userId];
+    PluginInstance = [[MADefoldPlugin alloc] init:&ForwardIOSEvent amazonAppId:appIdString privacyPolicyUrl:policyUrlString userId:userIdString ];
 }
 
 void SetMuted(bool muted){
@@ -110,6 +112,12 @@ void ShowBanner(BannerPosition bannerPos, const char* placement){
 }
 void HideBanner(){
     [PluginInstance hideAllBannerAds];
+}
+void ShowConsentFlow(){
+    [PluginInstance showConsentFlow];
+}
+bool IsUserGdprRegion(){
+        return [PluginInstance isUserGdprRegion];
 }
 bool IsBannerLoaded(){
         return [PluginInstance isAnyBannerAdLoaded];

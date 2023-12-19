@@ -10,7 +10,7 @@ typedef void(*DefoldEventCallback)(int messageId, NSString *body);
 
 #pragma mark - Initialization
 
-- (instancetype)init:(DefoldEventCallback)eventCallback amazonAppId:(NSString *)amazonAppId;
+- (instancetype)init:(DefoldEventCallback)eventCallback amazonAppId:(NSString *)amazonAppId privacyPolicyUrl:(NSString *)privacyPolicyUrl userId:(NSString *)userId;
 
 
 #pragma mark - Interstitials
@@ -41,6 +41,11 @@ typedef void(*DefoldEventCallback)(int messageId, NSString *body);
 - (void)destroyAllBannerAds;
 - (BOOL)isAnyBannerAdLoaded;
 - (BOOL)isAnyBannerAdShown;
+
+#pragma mark - Utility Methods
+
+- (BOOL)isUserGdprRegion;
+- (void)showConsentFlow;
 
 @end
 

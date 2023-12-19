@@ -113,12 +113,13 @@ public class AppLovinMaxJNI {
     private String amazonBannerSlotId = null;
 
     private final Activity mActivity;
+    private Boolean isUserGdprRegion = false;
 
     public AppLovinMaxJNI(final Activity activity) {
         mActivity = activity;
     }
 
-    public void initialize(String AmazonAppId) {
+    public void initialize(String AmazonAppId, String PrivacyPolicyUrl, String UserId) {
         AdRegistration.getInstance(AmazonAppId, mActivity);
         AdRegistration.setAdNetworkInfo(new DTBAdNetworkInfo(DTBAdNetwork.MAX));
         AdRegistration.setMRAIDSupportedVersions(new String[]{"1.0", "2.0", "3.0"});
@@ -126,19 +127,23 @@ public class AppLovinMaxJNI {
 
         AppLovinSdkSettings sdkSettings = new AppLovinSdkSettings(mActivity);
         sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setEnabled(true);
-        sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setPrivacyPolicyUri(Uri.parse("https://gameveterans.com/privacy-policy.html"));
-        sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setDebugUserGeography(AppLovinSdkConfiguration.ConsentFlowUserGeography.GDPR);
+        sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setPrivacyPolicyUri(Uri.parse(PrivacyPolicyUrl));
+        //sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setDebugUserGeography(AppLovinSdkConfiguration.ConsentFlowUserGeography.GDPR);
 
         AppLovinSdk sdk = AppLovinSdk.getInstance(sdkSettings, mActivity);
         sdk.setMediationProvider(AppLovinMediationProvider.MAX);
+        sdk.setUserIdentifier(UserId);
         sdk.initializeSdk(config -> {
-            Boolean isUserGdprRegion = false;
 
             if (config.getConsentFlowUserGeography() == AppLovinSdkConfiguration.ConsentFlowUserGeography.GDPR) {
                 isUserGdprRegion = true;
             }
-            sendSimpleMessage(MSG_INITIALIZATION, EVENT_COMPLETE, isUserGdprRegion);
+            sendSimpleMessage(MSG_INITIALIZATION, EVENT_COMPLETE);
         });
+    }
+
+    public boolean isUserGdprRegion() {
+        return isUserGdprRegion;
     }
 
     public void showConsentFlow() {
@@ -386,19 +391,6 @@ public class AppLovinMaxJNI {
         try {
             JSONObject obj = new JSONObject();
             obj.put(MSG_KEY_EVENT, eventId);
-            message = obj.toString();
-        } catch (JSONException e) {
-            message = getJsonConversionErrorMessage(e.getMessage());
-        }
-        maxsdkAddToQueue(msg, message);
-    }
-
-    private void sendSimpleMessage(int msg, int eventId, boolean isUserGdprRegion) {
-        String message;
-        try {
-            JSONObject obj = new JSONObject();
-            obj.put(MSG_KEY_EVENT, eventId);
-            obj.put(MSG_KEY_IS_USER_GDPR_REGION, isUserGdprRegion);
             message = obj.toString();
         } catch (JSONException e) {
             message = getJsonConversionErrorMessage(e.getMessage());

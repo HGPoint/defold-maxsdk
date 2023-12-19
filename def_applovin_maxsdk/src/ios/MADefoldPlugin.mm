@@ -57,10 +57,11 @@ static const int EVENT_COLLAPSED = 12;
 static const int EVENT_REVENUE_PAID = 13;
 static const int EVENT_SIZE_UPDATE = 14;
 static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
+static bool IS_USER_GDPR_REGION = false;
 
 #pragma mark - Initialization
 
-- (instancetype)init:(DefoldEventCallback)eventCallback amazonAppId:(NSString *)amazonAppId;
+- (instancetype)init:(DefoldEventCallback)eventCallback amazonAppId:(NSString *)amazonAppId privacyPolicyUrl:(nullable NSString *)privacyPolicyUrl userId:(nullable NSString *)userId;
 {
     self = [super init];
     if ( self )
@@ -74,7 +75,10 @@ static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
         self.adUnitIdentifiersToShowAfterCreate = [NSMutableArray arrayWithCapacity: 2];
         self.eventCallback = eventCallback;
         self.sdk = [ALSdk shared];
+        self.sdk.settings.termsAndPrivacyPolicyFlowSettings.enabled = YES;
+        self.sdk.settings.termsAndPrivacyPolicyFlowSettings.privacyPolicyURL = [NSURL URLWithString: privacyPolicyUrl];
         self.sdk.mediationProvider = ALMediationProviderMAX;
+        self.sdk.userIdentifier = userId;
         self.mainView = dmGraphics::GetNativeiOSUIView();
         self.mainSubView = dmGraphics::GetNativeiOSUIWindow();
         self.window = self.mainSubView;
@@ -90,6 +94,9 @@ static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
         [self.sdk setPluginVersion: @"defold-maxsdk"];
         [self.sdk initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
             // Start loading ads
+            if (configuration.consentFlowUserGeography == ALConsentFlowUserGeographyGDPR) {
+                IS_USER_GDPR_REGION = true;
+            }
             [self sendDefoldEvent: MSG_INITIALIZATION event_id: EVENT_COMPLETE parameters: @{@"plugin":@"defold-maxsdk"}];
         }];
         [[DTBAds sharedInstance] setAppKey: amazonAppId];
@@ -890,6 +897,24 @@ static const int EVENT_FAILED_TO_LOAD_WATERFALL = 15;;
 }
 
 #pragma mark - Utility Methods
+
+- (BOOL)isUserGdprRegion
+{
+    return IS_USER_GDPR_REGION;
+}
+
+- (void)showConsentFlow
+{
+     ALCMPService *cmpService = [ALSdk shared].cmpService;
+
+    [cmpService showCMPForExistingUserWithCompletion:^(ALCMPError * _Nullable error) {
+        
+        if ( !error )
+        {
+            // The CMP alert was shown successfully.
+        }
+    }];
+}
 
 - (NSDictionary<NSString *, id> *)adInfoForAd:(MAAd *)ad
 {

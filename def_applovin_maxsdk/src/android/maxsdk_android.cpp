@@ -44,6 +44,7 @@ struct AppLovin
     jmethodID      m_DestroyBanner;
     jmethodID      m_ShowBanner;
     jmethodID      m_HideBanner;
+    jmethodID      m_IsUserGdprRegion;
     jmethodID      m_IsBannerLoaded;
     jmethodID      m_IsBannerShown;
 };
@@ -237,7 +238,7 @@ static void CallVoidMethodInt(jobject instance, jmethodID method, int cint)
 
 static void InitJNIMethods(JNIEnv* env, jclass cls)
 {
-    g_maxsdk.m_Initialize             = env->GetMethodID(cls, "initialize", "(Ljava/lang/String;)V");
+    g_maxsdk.m_Initialize             = env->GetMethodID(cls, "initialize", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
     g_maxsdk.m_ShowConsentFlow        = env->GetMethodID(cls, "showConsentFlow", "()V");
     g_maxsdk.m_OnActivateApp          = env->GetMethodID(cls, "onActivateApp", "()V");
     g_maxsdk.m_OnDeactivateApp        = env->GetMethodID(cls, "onDeactivateApp", "()V");
@@ -261,6 +262,7 @@ static void InitJNIMethods(JNIEnv* env, jclass cls)
     g_maxsdk.m_ShowBanner     = env->GetMethodID(cls, "showBanner", "(ILjava/lang/String;)V");
     g_maxsdk.m_HideBanner     = env->GetMethodID(cls, "hideBanner", "()V");
     g_maxsdk.m_IsBannerLoaded = env->GetMethodID(cls, "isBannerLoaded", "()Z");
+    g_maxsdk.m_IsUserGdprRegion = env->GetMethodID(cls, "isUserGdprRegion", "()Z");
     g_maxsdk.m_IsBannerShown  = env->GetMethodID(cls, "isBannerShown", "()Z");
 }
 
@@ -287,9 +289,9 @@ void OnDeactivateApp()
     CallVoidMethod(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_OnDeactivateApp);
 }
 
-void Initialize(const char* amazonAppId)
+void Initialize(const char* amazonAppId, const char* privacyPolicyUrl, const char* userId)
 {
-    CallVoidMethodChar(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_Initialize, amazonAppId);
+    CallVoidMethodCharCharChar(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_Initialize, amazonAppId, privacyPolicyUrl, userId);
 }
 
 void ShowConsentFlow()
@@ -375,6 +377,11 @@ void ShowBanner(BannerPosition bannerPos, const char* placement)
 void HideBanner()
 {
     CallVoidMethod(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_HideBanner);
+}
+
+bool IsUserGdprRegion()
+{
+    return CallBoolMethod(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_IsUserGdprRegion);
 }
 
 bool IsBannerLoaded()
