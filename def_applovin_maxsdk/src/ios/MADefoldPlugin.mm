@@ -61,7 +61,7 @@ static bool IS_USER_GDPR_REGION = false;
 
 #pragma mark - Initialization
 
-- (instancetype)init:(DefoldEventCallback)eventCallback amazonAppId:(NSString *)amazonAppId privacyPolicyUrl:(nullable NSString *)privacyPolicyUrl userId:(nullable NSString *)userId;
+- (instancetype)init:(DefoldEventCallback)eventCallback amazonAppId:(NSString *)amazonAppId privacyPolicyUrl:(NSString *)privacyPolicyUrl userId:(NSString *)userId;
 {
     self = [super init];
     if ( self )
