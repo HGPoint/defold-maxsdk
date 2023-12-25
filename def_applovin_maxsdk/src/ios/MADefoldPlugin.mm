@@ -74,9 +74,10 @@ static bool IS_USER_GDPR_REGION = false;
         self.adViewConstraints = [NSMutableDictionary dictionaryWithCapacity: 2];
         self.adUnitIdentifiersToShowAfterCreate = [NSMutableArray arrayWithCapacity: 2];
         self.eventCallback = eventCallback;
-        self.sdk = [ALSdk shared];
-        self.sdk.settings.termsAndPrivacyPolicyFlowSettings.enabled = YES;
-        self.sdk.settings.termsAndPrivacyPolicyFlowSettings.privacyPolicyURL = [NSURL URLWithString: privacyPolicyUrl];
+        ALSdkSettings *settings = [[ALSdkSettings alloc] init];
+        settings.termsAndPrivacyPolicyFlowSettings.enabled = YES;
+        settings.termsAndPrivacyPolicyFlowSettings.privacyPolicyURL = [NSURL URLWithString: privacyPolicyUrl];
+        self.sdk = [ALSdk sharedWithSettings: settings];
         self.sdk.mediationProvider = ALMediationProviderMAX;
         self.sdk.userIdentifier = userId;
         self.mainView = dmGraphics::GetNativeiOSUIView();
@@ -905,7 +906,7 @@ static bool IS_USER_GDPR_REGION = false;
 
 - (void)showConsentFlow
 {
-     ALCMPService *cmpService = [ALSdk shared].cmpService;
+     ALCMPService *cmpService = self.sdk.cmpService;
 
     [cmpService showCMPForExistingUserWithCompletion:^(ALCMPError * _Nullable error) {
         
