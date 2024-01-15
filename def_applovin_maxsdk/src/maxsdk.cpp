@@ -98,6 +98,14 @@ static int Lua_SetHasUserConsent(lua_State* L)
     return 0;
 }
 
+static int Lua_HasUserConsent(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 1);
+    bool has_user_consent = HasUserConsent();
+    lua_pushboolean(L, has_user_consent);
+    return 1;
+}
+
 static int Lua_SetIsAgeRestrictedUser(lua_State* L)
 {
     DM_LUA_STACK_CHECK(L, 0);
@@ -338,6 +346,7 @@ static const luaL_reg Module_methods[] =
     {"set_muted", Lua_SetMuted},
     {"set_verbose_logging", Lua_SetVerboseLogging},
     {"set_has_user_consent", Lua_SetHasUserConsent},
+    {"has_user_consent", Lua_HasUserConsent},
     {"set_is_age_restricted_user", Lua_SetIsAgeRestrictedUser},
     {"set_do_not_sell", Lua_SetDoNotSell},
 //    {"set_fb_data_processing_options", Lua_SetFbDataProcessingOptions},

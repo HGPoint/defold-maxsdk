@@ -30,6 +30,7 @@ void ShowConsentFlow();
 void SetMuted(bool muted);
 void SetVerboseLogging(bool verbose);
 void SetHasUserConsent(bool hasConsent);
+bool HasUserConsent();
 void SetIsAgeRestrictedUser(bool ageRestricted);
 void SetDoNotSell(bool doNotSell);
 //void SetFbDataProcessingOptions(const char* cstr, int cint1, int cint2);
@@ -47,8 +48,9 @@ void LoadBanner(const char* unitId, const char* amazonSlotID, BannerSize bannerS
 void DestroyBanner();
 void ShowBanner(BannerPosition bannerPos, const char* placement);
 void HideBanner();
-bool IsUserGdprRegion();
 bool IsBannerLoaded();
 bool IsBannerShown();
+
+bool IsUserGdprRegion();
 
 } //namespace dmAppLovinMax

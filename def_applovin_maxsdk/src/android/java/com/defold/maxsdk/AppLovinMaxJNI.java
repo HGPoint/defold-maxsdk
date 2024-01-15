@@ -280,6 +280,10 @@ public class AppLovinMaxJNI {
         AppLovinPrivacySettings.setHasUserConsent(hasUserConsent, mActivity);
     }
 
+    public boolean hasUserConsent() {
+        return AppLovinPrivacySettings.hasUserConsent(mActivity);
+    }
+
     public void setIsAgeRestrictedUser(boolean isAgeRestrictedUser) {
         AppLovinPrivacySettings.setIsAgeRestrictedUser(isAgeRestrictedUser, mActivity);
     }

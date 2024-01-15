@@ -28,6 +28,7 @@ struct AppLovin
     jmethodID      m_SetMuted;
     jmethodID      m_SetVerboseLogging;
     jmethodID      m_SetHasUserConsent;
+    jmethodID      m_HasUserConsent;
     jmethodID      m_SetIsAgeRestrictedUser;
     jmethodID      m_SetDoNotSell;
     jmethodID      m_OpenMediationDebugger;
@@ -245,6 +246,7 @@ static void InitJNIMethods(JNIEnv* env, jclass cls)
     g_maxsdk.m_SetMuted               = env->GetMethodID(cls, "setMuted", "(Z)V");
     g_maxsdk.m_SetVerboseLogging      = env->GetMethodID(cls, "setVerboseLogging", "(Z)V");
     g_maxsdk.m_SetHasUserConsent      = env->GetMethodID(cls, "setHasUserConsent", "(Z)V");
+    g_maxsdk.m_HasUserConsent         = env->GetMethodID(cls, "hasUserConsent", "()Z");
     g_maxsdk.m_SetIsAgeRestrictedUser = env->GetMethodID(cls, "setIsAgeRestrictedUser", "(Z)V");
     g_maxsdk.m_SetDoNotSell           = env->GetMethodID(cls, "setDoNotSell", "(Z)V");
     g_maxsdk.m_OpenMediationDebugger  = env->GetMethodID(cls, "openMediationDebugger", "()V");
@@ -253,17 +255,17 @@ static void InitJNIMethods(JNIEnv* env, jclass cls)
     g_maxsdk.m_ShowInterstitial       = env->GetMethodID(cls, "showInterstitial", "(Ljava/lang/String;Ljava/lang/String;)V");
     g_maxsdk.m_IsInterstitialLoaded   = env->GetMethodID(cls, "isInterstitialLoaded", "(Ljava/lang/String;)Z");
 
-    g_maxsdk.m_LoadRewarded     = env->GetMethodID(cls, "loadRewarded", "(Ljava/lang/String;Ljava/lang/String;)V");
-    g_maxsdk.m_ShowRewarded     = env->GetMethodID(cls, "showRewarded", "(Ljava/lang/String;Ljava/lang/String;)V");
-    g_maxsdk.m_IsRewardedLoaded = env->GetMethodID(cls, "isRewardedLoaded", "(Ljava/lang/String;)Z");
+    g_maxsdk.m_LoadRewarded           = env->GetMethodID(cls, "loadRewarded", "(Ljava/lang/String;Ljava/lang/String;)V");
+    g_maxsdk.m_ShowRewarded           = env->GetMethodID(cls, "showRewarded", "(Ljava/lang/String;Ljava/lang/String;)V");
+    g_maxsdk.m_IsRewardedLoaded       = env->GetMethodID(cls, "isRewardedLoaded", "(Ljava/lang/String;)Z");
 
-    g_maxsdk.m_LoadBanner     = env->GetMethodID(cls, "loadBanner", "(Ljava/lang/String;Ljava/lang/String;I)V");
-    g_maxsdk.m_DestroyBanner  = env->GetMethodID(cls, "destroyBanner", "()V");
-    g_maxsdk.m_ShowBanner     = env->GetMethodID(cls, "showBanner", "(ILjava/lang/String;)V");
-    g_maxsdk.m_HideBanner     = env->GetMethodID(cls, "hideBanner", "()V");
-    g_maxsdk.m_IsBannerLoaded = env->GetMethodID(cls, "isBannerLoaded", "()Z");
-    g_maxsdk.m_IsUserGdprRegion = env->GetMethodID(cls, "isUserGdprRegion", "()Z");
-    g_maxsdk.m_IsBannerShown  = env->GetMethodID(cls, "isBannerShown", "()Z");
+    g_maxsdk.m_LoadBanner             = env->GetMethodID(cls, "loadBanner", "(Ljava/lang/String;Ljava/lang/String;I)V");
+    g_maxsdk.m_DestroyBanner          = env->GetMethodID(cls, "destroyBanner", "()V");
+    g_maxsdk.m_ShowBanner             = env->GetMethodID(cls, "showBanner", "(ILjava/lang/String;)V");
+    g_maxsdk.m_HideBanner             = env->GetMethodID(cls, "hideBanner", "()V");
+    g_maxsdk.m_IsBannerLoaded         = env->GetMethodID(cls, "isBannerLoaded", "()Z");
+    g_maxsdk.m_IsUserGdprRegion       = env->GetMethodID(cls, "isUserGdprRegion", "()Z");
+    g_maxsdk.m_IsBannerShown          = env->GetMethodID(cls, "isBannerShown", "()Z");
 }
 
 void Initialize_Ext()
@@ -312,6 +314,11 @@ void SetVerboseLogging(bool verbose)
 void SetHasUserConsent(bool hasConsent)
 {
     CallVoidMethodBool(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_SetHasUserConsent, hasConsent);
+}
+
+bool HasUserConsent()
+{
+    return CallBoolMethod(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_HasUserConsent);
 }
 
 void SetIsAgeRestrictedUser(bool ageRestricted)
