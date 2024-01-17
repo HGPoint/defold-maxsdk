@@ -20,9 +20,18 @@ void OnActivateApp(){}
 void OnDeactivateApp(){}
 
 
-void Initialize(const char* amazonAppId) {
+void Initialize(const char* amazonAppId, const char* privacyPolicyUrl, const char* termsOfUseUrl, const char* userId, bool debugUserGeography) {
     NSString* appIdString = [NSString stringWithUTF8String:amazonAppId];
-    PluginInstance = [[MADefoldPlugin alloc] init:&ForwardIOSEvent amazonAppId:appIdString];
+    NSString* userIdString = [NSString stringWithUTF8String:userId];
+    NSString* policyUrlString = nil;
+    NSString* termsOfUseUrlString = nil;
+    if(privacyPolicyUrl!=NULL){
+        policyUrlString = [NSString stringWithUTF8String:privacyPolicyUrl];
+    }
+    if(termsOfUseUrl!=NULL){
+        termsOfUseUrlString = [NSString stringWithUTF8String:termsOfUseUrl];
+    }
+    PluginInstance = [[MADefoldPlugin alloc] init:&ForwardIOSEvent amazonAppId:appIdString privacyPolicyUrl:policyUrlString termsOfUseUrl:termsOfUseUrlString userId:userIdString debugUserGeography:debugUserGeography];
 }
 
 void SetMuted(bool muted){
@@ -33,6 +42,7 @@ void SetMuted(bool muted){
         [ALSdk shared].settings.muted = NO;
     }
 }
+
 void SetVerboseLogging(bool verbose){
     if(verbose){
         [ALSdk shared].settings.verboseLoggingEnabled = YES;
@@ -41,6 +51,7 @@ void SetVerboseLogging(bool verbose){
         [ALSdk shared].settings.verboseLoggingEnabled = NO;
     }
 }
+
 void SetHasUserConsent(bool hasConsent){
     if(hasConsent){
         [ALPrivacySettings setHasUserConsent: YES];
@@ -49,6 +60,12 @@ void SetHasUserConsent(bool hasConsent){
         [ALPrivacySettings setHasUserConsent: NO];
     }
 }
+
+bool HasUserConsent()
+{
+    return [ALPrivacySettings hasUserConsent];
+}
+
 void SetIsAgeRestrictedUser(bool ageRestricted){
     if(ageRestricted){
         [ALPrivacySettings setIsAgeRestrictedUser: YES];
@@ -57,6 +74,7 @@ void SetIsAgeRestrictedUser(bool ageRestricted){
         [ALPrivacySettings setIsAgeRestrictedUser: NO];
     }
 }
+
 void SetDoNotSell(bool doNotSell){
     if(doNotSell){
         [ALPrivacySettings setDoNotSell: YES];
@@ -65,6 +83,7 @@ void SetDoNotSell(bool doNotSell){
         [ALPrivacySettings setDoNotSell: NO];
     }
 }
+
 void OpenMediationDebugger(){
     [[ALSdk shared] showMediationDebugger];
 }
@@ -110,6 +129,12 @@ void ShowBanner(BannerPosition bannerPos, const char* placement){
 }
 void HideBanner(){
     [PluginInstance hideAllBannerAds];
+}
+void ShowConsentFlow(){
+    [PluginInstance showConsentFlow];
+}
+bool IsUserGdprRegion(){
+        return [PluginInstance isUserGdprRegion];
 }
 bool IsBannerLoaded(){
         return [PluginInstance isAnyBannerAdLoaded];

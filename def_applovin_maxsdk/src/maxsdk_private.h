@@ -25,10 +25,12 @@ void Initialize_Ext();
 void OnActivateApp();
 void OnDeactivateApp();
 
-void Initialize(const char* amazonAppId);
+void Initialize(const char* amazonAppId, const char* privacyPolicyUrl, const char* termsOfUseUrl, const char* userId, bool debugUserGeography);
+void ShowConsentFlow();
 void SetMuted(bool muted);
 void SetVerboseLogging(bool verbose);
 void SetHasUserConsent(bool hasConsent);
+bool HasUserConsent();
 void SetIsAgeRestrictedUser(bool ageRestricted);
 void SetDoNotSell(bool doNotSell);
 //void SetFbDataProcessingOptions(const char* cstr, int cint1, int cint2);
@@ -48,5 +50,7 @@ void ShowBanner(BannerPosition bannerPos, const char* placement);
 void HideBanner();
 bool IsBannerLoaded();
 bool IsBannerShown();
+
+bool IsUserGdprRegion();
 
 } //namespace dmAppLovinMax

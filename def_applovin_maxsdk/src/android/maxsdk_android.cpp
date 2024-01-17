@@ -22,11 +22,13 @@ struct AppLovin
     jobject        m_AppLovinMaxJNI;
 
     jmethodID      m_Initialize;
+    jmethodID      m_ShowConsentFlow;
     jmethodID      m_OnActivateApp;
     jmethodID      m_OnDeactivateApp;
     jmethodID      m_SetMuted;
     jmethodID      m_SetVerboseLogging;
     jmethodID      m_SetHasUserConsent;
+    jmethodID      m_HasUserConsent;
     jmethodID      m_SetIsAgeRestrictedUser;
     jmethodID      m_SetDoNotSell;
     jmethodID      m_OpenMediationDebugger;
@@ -43,6 +45,7 @@ struct AppLovin
     jmethodID      m_DestroyBanner;
     jmethodID      m_ShowBanner;
     jmethodID      m_HideBanner;
+    jmethodID      m_IsUserGdprRegion;
     jmethodID      m_IsBannerLoaded;
     jmethodID      m_IsBannerShown;
 };
@@ -185,6 +188,59 @@ static void CallVoidMethodCharCharChar(jobject instance, jmethodID method, const
     }
 }
 
+
+static void CallVoidMethodCharCharCharCharBool(jobject instance, jmethodID method, const char* cstr1, const char* cstr2, const char* cstr3, const char* cstr4, bool cbool)
+{
+    dmAndroid::ThreadAttacher threadAttacher;
+    JNIEnv* env = threadAttacher.GetEnv();
+
+    jstring jstr1 = NULL;
+    if (cstr1)
+    {
+        jstr1 = env->NewStringUTF(cstr1);
+    }
+
+    jstring jstr2 = NULL;
+    if (cstr2)
+    {
+        jstr2 = env->NewStringUTF(cstr2);
+    }
+    
+    jstring jstr3 = NULL;
+    if (cstr3)
+    {
+        jstr3 = env->NewStringUTF(cstr3);
+    }
+
+    jstring jstr4 = NULL;
+    if (cstr4)
+    {
+        jstr4 = env->NewStringUTF(cstr4);
+    }
+
+    env->CallVoidMethod(instance, method, jstr1, jstr2, jstr3, jstr4, cbool);
+
+    if (cstr1)
+    {
+        env->DeleteLocalRef(jstr1);
+    }
+
+    if (cstr2)
+    {
+        env->DeleteLocalRef(jstr2);
+    }
+    
+    if (cstr3)
+    {
+        env->DeleteLocalRef(jstr3);
+    }
+
+    if (cstr4)
+    {
+        env->DeleteLocalRef(jstr4);
+    }
+}
+
 static void CallVoidMethodCharInt(jobject instance, jmethodID method, const char* cstr, int cint)
 {
     dmAndroid::ThreadAttacher threadAttacher;
@@ -236,12 +292,14 @@ static void CallVoidMethodInt(jobject instance, jmethodID method, int cint)
 
 static void InitJNIMethods(JNIEnv* env, jclass cls)
 {
-    g_maxsdk.m_Initialize             = env->GetMethodID(cls, "initialize", "(Ljava/lang/String;)V");
+    g_maxsdk.m_Initialize             = env->GetMethodID(cls, "initialize", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V");
+    g_maxsdk.m_ShowConsentFlow        = env->GetMethodID(cls, "showConsentFlow", "()V");
     g_maxsdk.m_OnActivateApp          = env->GetMethodID(cls, "onActivateApp", "()V");
     g_maxsdk.m_OnDeactivateApp        = env->GetMethodID(cls, "onDeactivateApp", "()V");
     g_maxsdk.m_SetMuted               = env->GetMethodID(cls, "setMuted", "(Z)V");
     g_maxsdk.m_SetVerboseLogging      = env->GetMethodID(cls, "setVerboseLogging", "(Z)V");
     g_maxsdk.m_SetHasUserConsent      = env->GetMethodID(cls, "setHasUserConsent", "(Z)V");
+    g_maxsdk.m_HasUserConsent         = env->GetMethodID(cls, "hasUserConsent", "()Z");
     g_maxsdk.m_SetIsAgeRestrictedUser = env->GetMethodID(cls, "setIsAgeRestrictedUser", "(Z)V");
     g_maxsdk.m_SetDoNotSell           = env->GetMethodID(cls, "setDoNotSell", "(Z)V");
     g_maxsdk.m_OpenMediationDebugger  = env->GetMethodID(cls, "openMediationDebugger", "()V");
@@ -250,16 +308,17 @@ static void InitJNIMethods(JNIEnv* env, jclass cls)
     g_maxsdk.m_ShowInterstitial       = env->GetMethodID(cls, "showInterstitial", "(Ljava/lang/String;Ljava/lang/String;)V");
     g_maxsdk.m_IsInterstitialLoaded   = env->GetMethodID(cls, "isInterstitialLoaded", "(Ljava/lang/String;)Z");
 
-    g_maxsdk.m_LoadRewarded     = env->GetMethodID(cls, "loadRewarded", "(Ljava/lang/String;Ljava/lang/String;)V");
-    g_maxsdk.m_ShowRewarded     = env->GetMethodID(cls, "showRewarded", "(Ljava/lang/String;Ljava/lang/String;)V");
-    g_maxsdk.m_IsRewardedLoaded = env->GetMethodID(cls, "isRewardedLoaded", "(Ljava/lang/String;)Z");
+    g_maxsdk.m_LoadRewarded           = env->GetMethodID(cls, "loadRewarded", "(Ljava/lang/String;Ljava/lang/String;)V");
+    g_maxsdk.m_ShowRewarded           = env->GetMethodID(cls, "showRewarded", "(Ljava/lang/String;Ljava/lang/String;)V");
+    g_maxsdk.m_IsRewardedLoaded       = env->GetMethodID(cls, "isRewardedLoaded", "(Ljava/lang/String;)Z");
 
-    g_maxsdk.m_LoadBanner     = env->GetMethodID(cls, "loadBanner", "(Ljava/lang/String;Ljava/lang/String;I)V");
-    g_maxsdk.m_DestroyBanner  = env->GetMethodID(cls, "destroyBanner", "()V");
-    g_maxsdk.m_ShowBanner     = env->GetMethodID(cls, "showBanner", "(ILjava/lang/String;)V");
-    g_maxsdk.m_HideBanner     = env->GetMethodID(cls, "hideBanner", "()V");
-    g_maxsdk.m_IsBannerLoaded = env->GetMethodID(cls, "isBannerLoaded", "()Z");
-    g_maxsdk.m_IsBannerShown  = env->GetMethodID(cls, "isBannerShown", "()Z");
+    g_maxsdk.m_LoadBanner             = env->GetMethodID(cls, "loadBanner", "(Ljava/lang/String;Ljava/lang/String;I)V");
+    g_maxsdk.m_DestroyBanner          = env->GetMethodID(cls, "destroyBanner", "()V");
+    g_maxsdk.m_ShowBanner             = env->GetMethodID(cls, "showBanner", "(ILjava/lang/String;)V");
+    g_maxsdk.m_HideBanner             = env->GetMethodID(cls, "hideBanner", "()V");
+    g_maxsdk.m_IsBannerLoaded         = env->GetMethodID(cls, "isBannerLoaded", "()Z");
+    g_maxsdk.m_IsUserGdprRegion       = env->GetMethodID(cls, "isUserGdprRegion", "()Z");
+    g_maxsdk.m_IsBannerShown          = env->GetMethodID(cls, "isBannerShown", "()Z");
 }
 
 void Initialize_Ext()
@@ -285,9 +344,14 @@ void OnDeactivateApp()
     CallVoidMethod(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_OnDeactivateApp);
 }
 
-void Initialize(const char* amazonAppId)
+void Initialize(const char* amazonAppId, const char* privacyPolicyUrl, const char* termsOfUseUrl, const char* userId, bool debugUserGeography)
 {
-    CallVoidMethodChar(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_Initialize, amazonAppId);
+    CallVoidMethodCharCharCharCharBool(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_Initialize, amazonAppId, privacyPolicyUrl, termsOfUseUrl, userId, debugUserGeography);
+}
+
+void ShowConsentFlow()
+{
+    CallVoidMethod(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_ShowConsentFlow);
 }
 
 void SetMuted(bool muted)
@@ -303,6 +367,11 @@ void SetVerboseLogging(bool verbose)
 void SetHasUserConsent(bool hasConsent)
 {
     CallVoidMethodBool(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_SetHasUserConsent, hasConsent);
+}
+
+bool HasUserConsent()
+{
+    return CallBoolMethod(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_HasUserConsent);
 }
 
 void SetIsAgeRestrictedUser(bool ageRestricted)
@@ -368,6 +437,11 @@ void ShowBanner(BannerPosition bannerPos, const char* placement)
 void HideBanner()
 {
     CallVoidMethod(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_HideBanner);
+}
+
+bool IsUserGdprRegion()
+{
+    return CallBoolMethod(g_maxsdk.m_AppLovinMaxJNI, g_maxsdk.m_IsUserGdprRegion);
 }
 
 bool IsBannerLoaded()

@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
@@ -26,6 +27,10 @@ import com.applovin.sdk.AppLovinMediationProvider;
 import com.applovin.sdk.AppLovinPrivacySettings;
 import com.applovin.sdk.AppLovinSdk;
 import com.applovin.sdk.AppLovinSdkUtils;
+import com.applovin.sdk.AppLovinSdkSettings;
+import com.applovin.sdk.AppLovinCmpService;
+import com.applovin.sdk.AppLovinCmpError;
+import com.applovin.sdk.AppLovinSdkConfiguration;
 
 import com.amazon.device.ads.AdError;
 import com.amazon.device.ads.AdRegistration;
@@ -88,6 +93,7 @@ public class AppLovinMaxJNI {
 
 
     private static final String MSG_KEY_EVENT = "event";
+    private static final String MSG_KEY_IS_USER_GDPR_REGION = "is_user_gdpr_region";
     private static final String MSG_KEY_AD_NETWORK = "ad_network";
     private static final String MSG_KEY_REVENUE = "revenue";
     private static final String MSG_KEY_AD_UNIT_ID = "ad_unit_id";
@@ -107,20 +113,57 @@ public class AppLovinMaxJNI {
     private String amazonBannerSlotId = null;
 
     private final Activity mActivity;
+    private Boolean isUserGdprRegion = false;
 
     public AppLovinMaxJNI(final Activity activity) {
         mActivity = activity;
     }
 
-    public void initialize(String AmazonAppId) {
+    public void initialize(String AmazonAppId, String PrivacyPolicyUrl, String TermsOfServiceUrl, String UserId, boolean DebugUserGeography) {
         AdRegistration.getInstance(AmazonAppId, mActivity);
         AdRegistration.setAdNetworkInfo(new DTBAdNetworkInfo(DTBAdNetwork.MAX));
         AdRegistration.setMRAIDSupportedVersions(new String[]{"1.0", "2.0", "3.0"});
         AdRegistration.setMRAIDPolicy(MRAIDPolicy.CUSTOM);
 
+        AppLovinSdkSettings sdkSettings = new AppLovinSdkSettings(mActivity);
+        if(PrivacyPolicyUrl != null && !PrivacyPolicyUrl.trim().isEmpty()) {
+            sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setEnabled(true);
+            sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setPrivacyPolicyUri(Uri.parse(PrivacyPolicyUrl));
+            if(TermsOfServiceUrl != null && !TermsOfServiceUrl.trim().isEmpty()) {
+                sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setTermsOfServiceUri(Uri.parse(TermsOfServiceUrl));
+            }
+            if (DebugUserGeography){
+                sdkSettings.getTermsAndPrivacyPolicyFlowSettings().setDebugUserGeography(AppLovinSdkConfiguration.ConsentFlowUserGeography.GDPR);
+            }
+        }
 
-        AppLovinSdk.getInstance(mActivity).setMediationProvider(AppLovinMediationProvider.MAX);
-        AppLovinSdk.getInstance(mActivity).initializeSdk(config -> sendSimpleMessage(MSG_INITIALIZATION, EVENT_COMPLETE));
+        AppLovinSdk sdk = AppLovinSdk.getInstance(sdkSettings, mActivity);
+        sdk.setMediationProvider(AppLovinMediationProvider.MAX);
+        sdk.setUserIdentifier(UserId);
+        sdk.initializeSdk(config -> {
+
+            if (config.getConsentFlowUserGeography() == AppLovinSdkConfiguration.ConsentFlowUserGeography.GDPR) {
+                isUserGdprRegion = true;
+            }
+            sendSimpleMessage(MSG_INITIALIZATION, EVENT_COMPLETE);
+        });
+    }
+
+    public boolean isUserGdprRegion() {
+        return isUserGdprRegion;
+    }
+
+    public void showConsentFlow() {
+        AppLovinCmpService cmpService = AppLovinSdk.getInstance(mActivity).getCmpService();
+
+        cmpService.showCmpForExistingUser(mActivity, new AppLovinCmpService.OnCompletedListener() {
+            @Override
+            public void onCompleted(final AppLovinCmpError error) {
+                if (null == error) {
+                    // The CMP alert was shown successfully.
+                }
+            }
+        });
     }
 
     private MaxInterstitialAd retrieveInterstitial(String adUnitId) {
@@ -242,6 +285,10 @@ public class AppLovinMaxJNI {
 
     public void setHasUserConsent(boolean hasUserConsent) {
         AppLovinPrivacySettings.setHasUserConsent(hasUserConsent, mActivity);
+    }
+
+    public boolean hasUserConsent() {
+        return AppLovinPrivacySettings.hasUserConsent(mActivity);
     }
 
     public void setIsAgeRestrictedUser(boolean isAgeRestrictedUser) {

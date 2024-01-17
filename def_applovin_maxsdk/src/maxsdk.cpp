@@ -13,6 +13,10 @@
 
 namespace dmAppLovinMax {
 
+const char* privacy_policy_url = NULL;
+const char* terms_of_use_url = NULL;
+bool debug_user_geography = false;
+
 static int Lua_Initialize(lua_State* L)
 {
     DM_LUA_STACK_CHECK(L, 0);
@@ -24,7 +28,23 @@ static int Lua_Initialize(lua_State* L)
         return 0;
     }
     const char* amazon_key = luaL_checkstring(L, 1);
-    Initialize(amazon_key);
+
+    if (lua_type(L, 2) != LUA_TSTRING) {
+        char msg[256];
+        snprintf(msg, sizeof(msg), "Expected string, got %s. Wrong type for user id '%s'.", luaL_typename(L, 2), lua_tostring(L, 2));
+        luaL_error(L, msg);
+        return 0;
+    }
+    const char* user_id = luaL_checkstring(L, 2);
+
+    Initialize(amazon_key, privacy_policy_url, terms_of_use_url, user_id, debug_user_geography);
+    return 0;
+}
+
+static int Lua_ShowConsentFlow(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 0);
+    ShowConsentFlow();
     return 0;
 }
 
@@ -75,6 +95,14 @@ static int Lua_SetHasUserConsent(lua_State* L)
     bool hasConsent_lua = luaL_checkbool(L, 1);
     SetHasUserConsent(hasConsent_lua);
     return 0;
+}
+
+static int Lua_HasUserConsent(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 1);
+    bool has_user_consent = HasUserConsent();
+    lua_pushboolean(L, has_user_consent);
+    return 1;
 }
 
 static int Lua_SetIsAgeRestrictedUser(lua_State* L)
@@ -300,13 +328,38 @@ static int Lua_IsBannerShown(lua_State* L)
     return 1;
 }
 
+static int Lua_isUserGdprRegion(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 1);
+    bool is_user_gdpr_region = IsUserGdprRegion();
+    lua_pushboolean(L, is_user_gdpr_region);
+    return 1;
+}
+
+static int Lua_SetDebugUserGeography(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 0);
+    if (lua_type(L, 1) != LUA_TBOOLEAN) {
+        char msg[256];
+        snprintf(msg, sizeof(msg), "Expected boolean, got %s. Wrong type for Lua_SetDebugUserGeography'%s'.", luaL_typename(L, 1), lua_tostring(L, 1));
+        luaL_error(L, msg);
+        return 0;
+    }
+    debug_user_geography = luaL_checkbool(L, 1);
+    return 0;
+}
+
 static const luaL_reg Module_methods[] =
 {
     {"initialize", Lua_Initialize},
+    {"show_consent_flow", Lua_ShowConsentFlow},
+    {"is_user_gdpr_region", Lua_isUserGdprRegion},
+    {"set_debug_user_geography", Lua_SetDebugUserGeography},
     {"set_callback", Lua_SetCallback},
     {"set_muted", Lua_SetMuted},
     {"set_verbose_logging", Lua_SetVerboseLogging},
     {"set_has_user_consent", Lua_SetHasUserConsent},
+    {"has_user_consent", Lua_HasUserConsent},
     {"set_is_age_restricted_user", Lua_SetIsAgeRestrictedUser},
     {"set_do_not_sell", Lua_SetDoNotSell},
 //    {"set_fb_data_processing_options", Lua_SetFbDataProcessingOptions},
@@ -385,6 +438,10 @@ static dmExtension::Result AppInitializeAppLovinMax(dmExtension::AppParams* para
 static dmExtension::Result InitializeAppLovinMax(dmExtension::Params* params)
 {
     LuaInit(params->m_L);
+    privacy_policy_url = dmConfigFile::GetString(params->m_ConfigFile, "applovin.privacy_policy_url", 0);
+    terms_of_use_url = dmConfigFile::GetString(params->m_ConfigFile, "applovin.terms_of_service_url", 0);
+    debug_user_geography = dmConfigFile::GetInt(params->m_ConfigFile, "applovin.debug_user_geography", 0) == 1;
+
     Initialize_Ext();
     InitializeCallback();
     dmLogInfo("Registered extension AppLovinMax");
