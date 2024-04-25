@@ -6,16 +6,19 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+
 	<key>AppLovinSdkKey</key>
 	<string>{{applovin.sdk_key_ios}}</string>
     {{#applovin.GoogleAdManagerAdapter}}
         <key>GADIsAdManagerApp</key>
         <true/>
     {{/applovin.GoogleAdManagerAdapter}}
+
     {{#applovin.GoogleAdapter}}
         <key>GADApplicationIdentifier</key>
         <string>{{admob.app_id}}</string>
     {{/applovin.GoogleAdapter}}
+
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -781,6 +784,10 @@
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
 			<string>tmhh9296z4.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>tvvz7th9br.skadnetwork</string>
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
