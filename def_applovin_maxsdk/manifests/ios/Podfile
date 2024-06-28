@@ -1,9 +1,9 @@
 platform :ios, '12.4'
-pod 'AppLovinSDK','12.5.0'
+pod 'AppLovinSDK','12.4.1'
 
 pod 'AppLovinMediationAmazonAdMarketplaceAdapter', '4.9.6.0'
 pod 'AmazonPublisherServicesSDK', '4.9.6'
-pod 'Google-Mobile-Ads-SDK', '11.6.0'
+pod 'Google-Mobile-Ads-SDK', '11.3.0'
 
 {{#applovin.MintegralAdapter}}
 pod 'AppLovinMediationMintegralAdapter', '7.6.7.0.0' 
@@ -46,11 +46,11 @@ pod 'AppLovinMediationFyberAdapter', '8.3.0.0'
 {{/applovin.FyberAdapter}}
 
 {{#applovin.GoogleAdManagerAdapter}}
-pod 'AppLovinMediationGoogleAdManagerAdapter', '11.6.0.0' 
+pod 'AppLovinMediationGoogleAdManagerAdapter', '11.3.0.0' 
 {{/applovin.GoogleAdManagerAdapter}}
 
 {{#applovin.GoogleAdapter}}
-pod 'AppLovinMediationGoogleAdapter', '11.6.0.0' 
+pod 'AppLovinMediationGoogleAdapter', '11.3.0.0' 
 {{/applovin.GoogleAdapter}}
 
 {{#applovin.ChartboostAdapter}}
