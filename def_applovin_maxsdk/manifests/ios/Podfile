@@ -1,5 +1,5 @@
 platform :ios, '12.4'
-pod 'AppLovinSDK','12.4.1'
+pod 'AppLovinSDK','12.5.0'
 
 pod 'AppLovinMediationAmazonAdMarketplaceAdapter', '4.9.6.0'
 pod 'AmazonPublisherServicesSDK', '4.9.6'
@@ -38,7 +38,7 @@ pod 'AppLovinMediationUnityAdsAdapter', '4.12.0.0'
 {{/applovin.UnityAdsAdapter}}
 
 {{#applovin.OguryPresageAdapter}}
-pod 'AppLovinMediationOguryPresageAdapter', '4.4.0.0' 
+pod 'AppLovinMediationOguryPresageAdapter', '4.4.0.1' 
 {{/applovin.OguryPresageAdapter}}
 
 {{#applovin.FyberAdapter}}
