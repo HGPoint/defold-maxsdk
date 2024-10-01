@@ -244,15 +244,6 @@ public class AppLovinMaxJNI {
                 public void onAdClicked(MaxAd ad) {
                     sendSimpleMessage(MSG_REWARDED, EVENT_CLICKED, ad);
                 }
-
-                @Override
-                public void onRewardedVideoStarted(MaxAd ad) {
-                }
-
-                @Override
-                public void onRewardedVideoCompleted(MaxAd ad) {
-                }
-
                 @Override
                 public void onUserRewarded(MaxAd ad, MaxReward reward) {
                     sendSimpleMessage(MSG_REWARDED, EVENT_EARNED_REWARD, ad);
@@ -292,7 +283,7 @@ public class AppLovinMaxJNI {
     }
 
     public void setIsAgeRestrictedUser(boolean isAgeRestrictedUser) {
-        AppLovinPrivacySettings.setIsAgeRestrictedUser(isAgeRestrictedUser, mActivity);
+//        AppLovinPrivacySettings.setIsAgeRestrictedUser(isAgeRestrictedUser, mActivity);
     }
 
     public void setDoNotSell(boolean doNotSell) {

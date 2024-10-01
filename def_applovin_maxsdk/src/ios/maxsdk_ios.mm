@@ -67,12 +67,12 @@ bool HasUserConsent()
 }
 
 void SetIsAgeRestrictedUser(bool ageRestricted){
-    if(ageRestricted){
-        [ALPrivacySettings setIsAgeRestrictedUser: YES];
-    }
-    else{
-        [ALPrivacySettings setIsAgeRestrictedUser: NO];
-    }
+    // if(ageRestricted){
+    //     [ALPrivacySettings setIsAgeRestrictedUser: YES];
+    // }
+    // else{
+    //     [ALPrivacySettings setIsAgeRestrictedUser: NO];
+    // }
 }
 
 void SetDoNotSell(bool doNotSell){

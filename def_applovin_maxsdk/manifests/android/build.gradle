@@ -36,62 +36,62 @@ dependencies {
     // https://search.maven.org/search?q=g:com.applovin.mediation
 
     // charboost
-    implementation 'com.google.android.gms:play-services-base:16.1.0'
+    implementation 'com.google.android.gms:play-services-base:18.5.0'
     // mintegral, inmobi
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
     // inmobi
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation 'com.applovin:applovin-sdk:12.4.2'
+    implementation 'com.applovin:applovin-sdk:13.0.0'
 
-    implementation 'com.applovin.mediation:amazon-tam-adapter:9.9.4.0'
+    implementation 'com.applovin.mediation:amazon-tam-adapter:9.10.2.0'
     implementation 'com.amazon.android:aps-sdk:9.9.4'
-    implementation 'com.google.android.ump:user-messaging-platform:2.2.0'
+    implementation 'com.google.android.ump:user-messaging-platform:3.0.0'
 
 
 {{#applovin.FacebookAdapter}}
-    implementation 'com.applovin.mediation:facebook-adapter:6.17.0.0'
+    implementation 'com.applovin.mediation:facebook-adapter:6.18.0.0'
 {{/applovin.FacebookAdapter}}
 {{#applovin.MintegralAdapter}}
-    implementation 'com.applovin.mediation:mintegral-adapter:16.7.21.0'
+    implementation 'com.applovin.mediation:mintegral-adapter:16.8.51.2'
 {{/applovin.MintegralAdapter}}
 {{#applovin.InMobiAdapter}}
-    implementation 'com.applovin.mediation:inmobi-adapter:10.6.7.0'
+    implementation 'com.applovin.mediation:inmobi-adapter:10.7.7.2'
 {{/applovin.InMobiAdapter}}
 {{#applovin.IronSourceAdapter}}
-    implementation 'com.applovin.mediation:ironsource-adapter:8.0.0.0.0'
+    implementation 'com.applovin.mediation:ironsource-adapter:8.3.0.0.2'
 {{/applovin.IronSourceAdapter}}
 {{#applovin.VungleAdapter}}
-    implementation 'com.applovin.mediation:vungle-adapter:7.3.1.2' //Liftoff Monetize *
+    implementation 'com.applovin.mediation:vungle-adapter:7.4.1.2' //Liftoff Monetize *
 {{/applovin.VungleAdapter}}
 {{#applovin.MaioAdapter}}
-    implementation 'com.applovin.mediation:maio-adapter:1.1.16.2'
+    implementation 'com.applovin.mediation:maio-adapter:1.1.16.3'
 {{/applovin.MaioAdapter}}
 {{#applovin.MyTargetAdapter}}
-    implementation 'com.applovin.mediation:mytarget-adapter:5.20.1.0' //VK Ad Network
+    implementation 'com.applovin.mediation:mytarget-adapter:5.22.1.1' //VK Ad Network
 {{/applovin.MyTargetAdapter}}
 {{#applovin.UnityAdsAdapter}}
-    implementation 'com.applovin.mediation:unityads-adapter:4.10.0.0'
+    implementation 'com.applovin.mediation:unityads-adapter:4.12.3.0'
 {{/applovin.UnityAdsAdapter}}
 {{#applovin.OguryPresageAdapter}}
-    implementation 'com.applovin.mediation:ogury-presage-adapter:5.6.2.2'
+    implementation 'com.applovin.mediation:ogury-presage-adapter:5.8.0.0'
 {{/applovin.OguryPresageAdapter}}
 {{#applovin.FyberAdapter}}
-    implementation 'com.applovin.mediation:fyber-adapter:8.2.7.1' //DT Exchange
+    implementation 'com.applovin.mediation:fyber-adapter:8.3.1.1' //DT Exchange
 {{/applovin.FyberAdapter}}
 {{#applovin.GoogleAdManagerAdapter}}
-    implementation 'com.applovin.mediation:google-ad-manager-adapter:23.0.0.1'
+    implementation 'com.applovin.mediation:google-ad-manager-adapter:23.3.0.1'
 {{/applovin.GoogleAdManagerAdapter}}
 {{#applovin.GoogleAdapter}}
-    implementation 'com.applovin.mediation:google-adapter:23.0.0.1'
+    implementation 'com.applovin.mediation:google-adapter:23.3.0.1'
 {{/applovin.GoogleAdapter}}
 {{#applovin.ChartboostAdapter}}
-    implementation 'com.applovin.mediation:chartboost-adapter:9.7.0.0'
+    implementation 'com.applovin.mediation:chartboost-adapter:9.7.0.3'
 {{/applovin.ChartboostAdapter}}
 {{#applovin.ByteDanceAdapter}}
-    implementation 'com.applovin.mediation:bytedance-adapter:5.9.0.3.0' //Pangle
+    implementation 'com.applovin.mediation:bytedance-adapter:6.2.0.7.0' //Pangle
 {{/applovin.ByteDanceAdapter}}
 {{#applovin.BidMachineAdapter}}
-    implementation 'com.applovin.mediation:bidmachine-adapter:2.6.0.1'
+    implementation 'com.applovin.mediation:bidmachine-adapter:3.0.1.2'
 {{/applovin.BidMachineAdapter}}
 }
