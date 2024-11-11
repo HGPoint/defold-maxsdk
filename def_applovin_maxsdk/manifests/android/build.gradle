@@ -29,6 +29,22 @@ repositories {
 {{#applovin.BidMachineAdapter}}
     maven { url "https://artifactory.bidmachine.io/bidmachine" }
 {{/applovin.BidMachineAdapter}}
+
+{{#applovin.PubmaticAdapter}}
+    maven { url "https://repo.pubmatic.com/artifactory/public-repos" }
+{{/applovin.PubmaticAdapter}}
+
+{{#applovin.SmaatoAdapter}}
+    maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" }
+{{/applovin.SmaatoAdapter}}
+
+{{#applovin.VerveAdapter}}
+    maven { url "https://verve.jfrog.io/artifactory/verve-gradle-release" }
+{{/applovin.VerveAdapter}}
+
+{{#applovin.YsoAdapter}}
+    maven { url "https://ysonetwork.s3.eu-west-3.amazonaws.com/sdk/android" }
+{{/applovin.YsoAdapter}}
 }
 
 dependencies {
@@ -42,56 +58,110 @@ dependencies {
     // inmobi
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation 'com.applovin:applovin-sdk:13.0.0'
+    implementation 'com.applovin:applovin-sdk:13.0.1'
 
-    implementation 'com.applovin.mediation:amazon-tam-adapter:9.10.2.0'
-    implementation 'com.amazon.android:aps-sdk:9.9.4'
+    implementation 'com.applovin.mediation:amazon-tam-adapter:9.10.3.2'
+    implementation 'com.amazon.android:aps-sdk:9.10.3'
     implementation 'com.google.android.ump:user-messaging-platform:3.0.0'
 
 
-{{#applovin.FacebookAdapter}}
-    implementation 'com.applovin.mediation:facebook-adapter:6.18.0.0'
-{{/applovin.FacebookAdapter}}
-{{#applovin.MintegralAdapter}}
-    implementation 'com.applovin.mediation:mintegral-adapter:16.8.51.2'
-{{/applovin.MintegralAdapter}}
-{{#applovin.InMobiAdapter}}
-    implementation 'com.applovin.mediation:inmobi-adapter:10.7.7.2'
-{{/applovin.InMobiAdapter}}
-{{#applovin.IronSourceAdapter}}
-    implementation 'com.applovin.mediation:ironsource-adapter:8.3.0.0.2'
-{{/applovin.IronSourceAdapter}}
-{{#applovin.VungleAdapter}}
-    implementation 'com.applovin.mediation:vungle-adapter:7.4.1.2' //Liftoff Monetize *
-{{/applovin.VungleAdapter}}
-{{#applovin.MaioAdapter}}
-    implementation 'com.applovin.mediation:maio-adapter:1.1.16.3'
-{{/applovin.MaioAdapter}}
-{{#applovin.MyTargetAdapter}}
-    implementation 'com.applovin.mediation:mytarget-adapter:5.22.1.1' //VK Ad Network
-{{/applovin.MyTargetAdapter}}
-{{#applovin.UnityAdsAdapter}}
-    implementation 'com.applovin.mediation:unityads-adapter:4.12.3.0'
-{{/applovin.UnityAdsAdapter}}
-{{#applovin.OguryPresageAdapter}}
-    implementation 'com.applovin.mediation:ogury-presage-adapter:5.8.0.0'
-{{/applovin.OguryPresageAdapter}}
-{{#applovin.FyberAdapter}}
-    implementation 'com.applovin.mediation:fyber-adapter:8.3.1.1' //DT Exchange
-{{/applovin.FyberAdapter}}
-{{#applovin.GoogleAdManagerAdapter}}
-    implementation 'com.applovin.mediation:google-ad-manager-adapter:23.3.0.1'
-{{/applovin.GoogleAdManagerAdapter}}
-{{#applovin.GoogleAdapter}}
-    implementation 'com.applovin.mediation:google-adapter:23.3.0.1'
-{{/applovin.GoogleAdapter}}
-{{#applovin.ChartboostAdapter}}
-    implementation 'com.applovin.mediation:chartboost-adapter:9.7.0.3'
-{{/applovin.ChartboostAdapter}}
-{{#applovin.ByteDanceAdapter}}
-    implementation 'com.applovin.mediation:bytedance-adapter:6.2.0.7.0' //Pangle
-{{/applovin.ByteDanceAdapter}}
 {{#applovin.BidMachineAdapter}}
-    implementation 'com.applovin.mediation:bidmachine-adapter:3.0.1.2'
+    implementation 'com.applovin.mediation:bidmachine-adapter:3.1.0.0'
 {{/applovin.BidMachineAdapter}}
+
+{{#applovin.BigoAdapter}}
+    implementation 'com.applovin.mediation:bigoads-adapter:5.0.2.0'
+{{/applovin.BigoAdapter}}
+
+{{#applovin.ChartboostAdapter}}
+    implementation 'com.applovin.mediation:chartboost-adapter:9.8.0.1'
+{{/applovin.ChartboostAdapter}}
+
+{{#applovin.FyberAdapter}}
+    implementation 'com.applovin.mediation:fyber-adapter:8.3.3.0' //DT Exchange
+{{/applovin.FyberAdapter}}
+
+{{#applovin.GoogleAdManagerAdapter}}
+    implementation 'com.applovin.mediation:google-ad-manager-adapter:23.5.0.0'
+{{/applovin.GoogleAdManagerAdapter}}
+
+{{#applovin.GoogleAdapter}}
+    implementation 'com.applovin.mediation:google-adapter:23.5.0.0'
+{{/applovin.GoogleAdapter}}
+
+{{#applovin.HyprmxAdapter}}
+    implementation 'com.applovin.mediation:hyprmx-adapter:6.4.2.2'
+{{/applovin.HyprmxAdapter}}
+
+{{#applovin.InMobiAdapter}}
+    implementation 'com.applovin.mediation:inmobi-adapter:10.7.8.1'
+{{/applovin.InMobiAdapter}}
+
+{{#applovin.IronSourceAdapter}}
+    implementation 'com.applovin.mediation:ironsource-adapter:8.4.0.0.1'
+{{/applovin.IronSourceAdapter}}
+
+{{#applovin.VungleAdapter}}
+    implementation 'com.applovin.mediation:vungle-adapter:7.4.2.1' //Liftoff Monetize *
+{{/applovin.VungleAdapter}}
+
+{{#applovin.LineAdapter}}
+    implementation 'com.applovin.mediation:line-adapter:2024.8.27.1'
+{{/applovin.LineAdapter}}
+
+{{#applovin.MaioAdapter}}
+    implementation 'com.applovin.mediation:maio-adapter:2.0.1.1'
+{{/applovin.MaioAdapter}}
+
+{{#applovin.FacebookAdapter}}
+    implementation 'com.applovin.mediation:facebook-adapter:6.18.0.1'
+{{/applovin.FacebookAdapter}}
+
+{{#applovin.MintegralAdapter}}
+    implementation 'com.applovin.mediation:mintegral-adapter:16.8.81.0'
+{{/applovin.MintegralAdapter}}
+
+{{#applovin.MobileFuseAdapter}}
+    implementation 'com.applovin.mediation:mobilefuse-adapter:1.8.0.1'
+{{/applovin.MobileFuseAdapter}}
+
+{{#applovin.MobileFuseAdapter}}
+    implementation 'com.applovin.mediation:moloco-adapter:3.3.0.0'
+{{/applovin.MobileFuseAdapter}}
+
+{{#applovin.OguryPresageAdapter}}
+    implementation 'com.applovin.mediation:ogury-presage-adapter:6.0.0.1'
+{{/applovin.OguryPresageAdapter}}
+
+{{#applovin.ByteDanceAdapter}}
+    implementation 'com.applovin.mediation:bytedance-adapter:6.3.0.4.0' //Pangle
+{{/applovin.ByteDanceAdapter}}
+
+{{#applovin.PubmaticAdapter}}
+    implementation 'com.applovin.mediation:pubmatic-adapter:4.1.0.0'
+{{/applovin.PubmaticAdapter}}
+
+{{#applovin.SmaatoAdapter}}
+    implementation 'com.applovin.mediation:smaato-adapter:22.7.1.1'
+{{/applovin.SmaatoAdapter}}
+
+{{#applovin.UnityAdsAdapter}}
+    implementation 'com.applovin.mediation:unityads-adapter:4.12.4.0'
+{{/applovin.UnityAdsAdapter}}
+
+{{#applovin.VerveAdapter}}
+    implementation 'com.applovin.mediation:verve-adapter:3.2.0.0'
+{{/applovin.VerveAdapter}}
+
+{{#applovin.MyTargetAdapter}}
+    implementation 'com.applovin.mediation:mytarget-adapter:5.23.0.0' //VK Ad Network
+{{/applovin.MyTargetAdapter}}
+
+{{#applovin.YandexAdapter}}
+    implementation 'com.applovin.mediation:yandex-adapter:7.6.0.1'
+{{/applovin.YandexAdapter}}
+
+{{#applovin.YsoAdapter}}
+    implementation 'com.applovin.mediation:yso-network-adapter:+'
+{{/applovin.YsoAdapter}}
 }
