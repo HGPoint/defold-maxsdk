@@ -4,9 +4,29 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>ALConsentFlowATT.json</key>
+		<data>
+		B68lBq++BAY+jMXppPQMeodKf6Y=
+		</data>
+		<key>ALConsentFlowPrivacyPolicy.json</key>
+		<data>
+		enyHoRRZjqG0QtIreZ5uiMYon1w=
+		</data>
+		<key>ALConsentFlowPrivacyPolicyAndATT.json</key>
+		<data>
+		M1YfYt8Q3Tngv9OPVAIjkZXWZ9g=
+		</data>
+		<key>ALConsentFlowTermsOfServiceAndPrivacyPolicy.json</key>
+		<data>
+		Nno9A+Zy29yupWDRdQb4wo3vGhs=
+		</data>
+		<key>ALConsentFlowTermsOfServiceAndPrivacyPolicyAndATT.json</key>
+		<data>
+		vr86VwQ/b4cOzV27eqTu2wNioxY=
+		</data>
 		<key>ALConsentFlowUnifiedCMP.json</key>
 		<data>
-		9ti/Yc+JcYyXJXlBNNZg3Lfw9QI=
+		3pB6zSdaV+Z8cSBJ0rdpDjBeQ+s=
 		</data>
 		<key>ALDDetailTableViewCell.nib</key>
 		<data>
@@ -14,7 +34,7 @@
 		</data>
 		<key>ALDMultiAdViewController.storyboardc/3jf-B1-XNL-view-Iqa-CO-DFs.nib</key>
 		<data>
-		e2Lgo4iYbRvn54Uol2OystjhdqY=
+		OUumxhxGK6JY0ouO409PaBcLlRo=
 		</data>
 		<key>ALDMultiAdViewController.storyboardc/ALDMultiAdViewController.nib</key>
 		<data>
@@ -30,11 +50,15 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		Zkw1lLZDrRZT9RDKXMN4EwHjCs0=
+		HUNPz/aUoOxUjKaOxdzA0KaR5fw=
 		</data>
 		<key>Base.lproj/Localizable.strings</key>
 		<data>
-		+n3goDGhz9XLhhqQk30KmjVmoi0=
+		8pvUn0qQ2xTKSNX6tpyIHSqzp3E=
+		</data>
+		<key>MAHybridNativeAdView.nib</key>
+		<data>
+		vexfWf9Q6UU9GOyqEi/3MYhzNnc=
 		</data>
 		<key>MANativeAdBannerView.nib</key>
 		<data>
@@ -74,13 +98,13 @@
 		</data>
 		<key>OMLICENSE</key>
 		<data>
-		SGCet3y1zOIk0w1RoZVEbhBBspg=
+		Eq/AvBcL2+jfm6NHJidXNHfgAcM=
 		</data>
 		<key>de.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WjTcNMkxY/MjQXCjAT7j+MCsomI=
+			ohhHvMyMKZVhQHXV+J/usUwLslQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -89,7 +113,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+n3goDGhz9XLhhqQk30KmjVmoi0=
+			8pvUn0qQ2xTKSNX6tpyIHSqzp3E=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -98,7 +122,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zV5ShzchRpk6aH9hIZDFcXGppEE=
+			J/x2Yz28jZFPsr0V02HiyGDDUpU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -107,7 +131,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			crZeig2CJTEuSXjgM0AaiWuN+/U=
+			aEyTBN1QDxMWNy8U0M4oObT1QDs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -116,7 +140,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JZag0LiMv9WtKgWRgF72ZYDg0vc=
+			RoOmq/+S/CtK1Gn53iWsCTGIHlA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -125,7 +149,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dKR0qOXQBdru7VSNuYi6O0cQzTE=
+			WdngiPQi12OfpuFcuaTOgVKtYAM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -134,15 +158,15 @@
 		<data>
 		xrLmOHGKRkA1PdlxjX8QdhUlYC8=
 		</data>
-		<key>omsdk-v1.5.3.js</key>
+		<key>omsdk-v1.4.12.js</key>
 		<data>
-		QGf4WdeRTCSlqIhGAQ2SefJqVSo=
+		xFoo41tIvFKNNRq9NwW500wQtM8=
 		</data>
 		<key>zh-Hans.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			K62+yfeSNMLZTZz30yIC2aibB+A=
+			sqX/YwkwsL3gUrf1zFkTDvstel8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -151,7 +175,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cclhGN8G7c/deGUkxFkNnYZ/cIE=
+			CMHCzbGGWkb1Mxtxi4jCK2Qb208=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -159,15 +183,70 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>ALConsentFlowATT.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			B68lBq++BAY+jMXppPQMeodKf6Y=
+			</data>
+			<key>hash2</key>
+			<data>
+			I8MC8PiNfLd6AniG/Eh/oN+UTAXcJtpbvta9wCZsxdo=
+			</data>
+		</dict>
+		<key>ALConsentFlowPrivacyPolicy.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			enyHoRRZjqG0QtIreZ5uiMYon1w=
+			</data>
+			<key>hash2</key>
+			<data>
+			LlaOA+a1j/MsNy6vusWOguLrCvK1PAEGAI5QrR2ZeUM=
+			</data>
+		</dict>
+		<key>ALConsentFlowPrivacyPolicyAndATT.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			M1YfYt8Q3Tngv9OPVAIjkZXWZ9g=
+			</data>
+			<key>hash2</key>
+			<data>
+			5+zqoKOk6gCeRTyqiyfRcI7V0dMF7qzXgE92rlqBUhY=
+			</data>
+		</dict>
+		<key>ALConsentFlowTermsOfServiceAndPrivacyPolicy.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Nno9A+Zy29yupWDRdQb4wo3vGhs=
+			</data>
+			<key>hash2</key>
+			<data>
+			OsR3ZQjKEcpx6udatYTaipCgK/X8gGqenR0EQE+pzIw=
+			</data>
+		</dict>
+		<key>ALConsentFlowTermsOfServiceAndPrivacyPolicyAndATT.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vr86VwQ/b4cOzV27eqTu2wNioxY=
+			</data>
+			<key>hash2</key>
+			<data>
+			KYvnbTHl9K8RsJQY3kxmuOT5HWME+C3Xpra9hypMYfU=
+			</data>
+		</dict>
 		<key>ALConsentFlowUnifiedCMP.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9ti/Yc+JcYyXJXlBNNZg3Lfw9QI=
+			3pB6zSdaV+Z8cSBJ0rdpDjBeQ+s=
 			</data>
 			<key>hash2</key>
 			<data>
-			4ZUGNunuEkj1IsFjRQoabM5J0tHe7ZB40Wj4uGB5Gok=
+			MAubWAHFLBEYGMvyipzwZAuZt/SFoln0bAupnAD3OWw=
 			</data>
 		</dict>
 		<key>ALDDetailTableViewCell.nib</key>
@@ -185,11 +264,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			e2Lgo4iYbRvn54Uol2OystjhdqY=
+			OUumxhxGK6JY0ouO409PaBcLlRo=
 			</data>
 			<key>hash2</key>
 			<data>
-			W1p+6As7+7FjlKJHby07ZuqjuGLiROJt2PexZqnFP+Q=
+			i/xncX/qwDYlEm1bKfIuQmJ7rHdsABZ5wVaMBcxtHIM=
 			</data>
 		</dict>
 		<key>ALDMultiAdViewController.storyboardc/ALDMultiAdViewController.nib</key>
@@ -229,22 +308,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Zkw1lLZDrRZT9RDKXMN4EwHjCs0=
+			HUNPz/aUoOxUjKaOxdzA0KaR5fw=
 			</data>
 			<key>hash2</key>
 			<data>
-			m7+3qPcOras05kPDaBZF1i3zXSTULg/YfcVOlIFFa5Q=
+			zjUTk7uO085wGMJpYlIPqGAeZuaLPBw3e4eCk80BBSc=
 			</data>
 		</dict>
 		<key>Base.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+n3goDGhz9XLhhqQk30KmjVmoi0=
+			8pvUn0qQ2xTKSNX6tpyIHSqzp3E=
 			</data>
 			<key>hash2</key>
 			<data>
-			JPZAKGpAdtdBcUEM1ugczY4GaI5jVX+SwPt+vBs9kV4=
+			Z8ITLLftSgpbuRES/hELT2qso0qJnZPP/IwSB+xepnY=
+			</data>
+		</dict>
+		<key>MAHybridNativeAdView.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vexfWf9Q6UU9GOyqEi/3MYhzNnc=
+			</data>
+			<key>hash2</key>
+			<data>
+			zUF32N+bD2EFU0zlDYGGKapPU/6hdVV0RuNyD5FYthQ=
 			</data>
 		</dict>
 		<key>MANativeAdBannerView.nib</key>
@@ -350,22 +440,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SGCet3y1zOIk0w1RoZVEbhBBspg=
+			Eq/AvBcL2+jfm6NHJidXNHfgAcM=
 			</data>
 			<key>hash2</key>
 			<data>
-			wX2kHozHtoxWzo+1TzdTvOjMrpme5WmGXjjWfdeNCSc=
+			YeXJiTAU447VjJbPUiB4yoLGGli+nQlwWl1J5cZT9+I=
 			</data>
 		</dict>
 		<key>de.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WjTcNMkxY/MjQXCjAT7j+MCsomI=
+			ohhHvMyMKZVhQHXV+J/usUwLslQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			jRuO/+/guq/IwLhmJSVa1vpoKhLlK+QY+tL1I2QKqyk=
+			q7DF4q+ybW1RG3Dt0vXBU51stk4yMWw1CwPDLHzQ3vY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -374,11 +464,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+n3goDGhz9XLhhqQk30KmjVmoi0=
+			8pvUn0qQ2xTKSNX6tpyIHSqzp3E=
 			</data>
 			<key>hash2</key>
 			<data>
-			JPZAKGpAdtdBcUEM1ugczY4GaI5jVX+SwPt+vBs9kV4=
+			Z8ITLLftSgpbuRES/hELT2qso0qJnZPP/IwSB+xepnY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -387,11 +477,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zV5ShzchRpk6aH9hIZDFcXGppEE=
+			J/x2Yz28jZFPsr0V02HiyGDDUpU=
 			</data>
 			<key>hash2</key>
 			<data>
-			xRmBgOhV7NYX0XiX7NBbJuD/eTv2/apgz3pu8um4uS0=
+			5Flxn1RDNNY9K8n94H2Arw4hpvDyWjeUst4ogy6OaO0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -400,11 +490,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			crZeig2CJTEuSXjgM0AaiWuN+/U=
+			aEyTBN1QDxMWNy8U0M4oObT1QDs=
 			</data>
 			<key>hash2</key>
 			<data>
-			NzdHenhckrDjRcRBhhjZ/NnObpd5LqIH6T1HKu4q6p4=
+			ygKi1mBC+D8Tz2AelBIheQ0gIXEg8VJz61Bg00Yw5KY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -413,11 +503,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JZag0LiMv9WtKgWRgF72ZYDg0vc=
+			RoOmq/+S/CtK1Gn53iWsCTGIHlA=
 			</data>
 			<key>hash2</key>
 			<data>
-			c5lVEKJU2sKg4ovYfJ/GWEXU4swGzM1z1xLvFY0Cw+k=
+			gyRb43WpJIbzYPifWcQ5USW42H3WbU0izJEwsOJKnBU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -426,11 +516,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dKR0qOXQBdru7VSNuYi6O0cQzTE=
+			WdngiPQi12OfpuFcuaTOgVKtYAM=
 			</data>
 			<key>hash2</key>
 			<data>
-			SuAwurxmsrTnDcS+5obVTFeVlXKPApqjJGgvQExvOZE=
+			umtilSrgw0YG3Tw8EYLcwrNsa5gWJXGO6RdxUS0O02I=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -446,26 +536,26 @@
 			WUTtOynoFPERt7tbMpqwDPv3YX9EfZjQDLz1X3hRVww=
 			</data>
 		</dict>
-		<key>omsdk-v1.5.3.js</key>
+		<key>omsdk-v1.4.12.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QGf4WdeRTCSlqIhGAQ2SefJqVSo=
+			xFoo41tIvFKNNRq9NwW500wQtM8=
 			</data>
 			<key>hash2</key>
 			<data>
-			3hWBhbztuR6RkPOvM8mRyykVlS01tgBQ+FBIAKzTLM4=
+			iWz5BbK1YoGNpY4Z4ltSUIPxhjj2ubDXxq6kEamQdYU=
 			</data>
 		</dict>
 		<key>zh-Hans.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			K62+yfeSNMLZTZz30yIC2aibB+A=
+			sqX/YwkwsL3gUrf1zFkTDvstel8=
 			</data>
 			<key>hash2</key>
 			<data>
-			KLqFmkWVngLzE67+HOlTvvkQZPtMkqnqcaJhQHHYs6g=
+			NSLXnZpRgGv4o+wwveW/Xf+RV1mBebHIT8Be6Sh7LU0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -474,11 +564,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cclhGN8G7c/deGUkxFkNnYZ/cIE=
+			CMHCzbGGWkb1Mxtxi4jCK2Qb208=
 			</data>
 			<key>hash2</key>
 			<data>
-			G7NuIJ6LjaERW7g+1YXxjeHRW8Fn1NdZtroRHdYbmrw=
+			RLMKQwwVnkKqjDHsmSFDugq6aF2Fk8GONR12ATDMky4=
 			</data>
 			<key>optional</key>
 			<true/>

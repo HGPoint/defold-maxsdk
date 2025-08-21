@@ -1,5 +1,5 @@
 platform :ios, '12.4'
-pod 'AppLovinSDK','13.3.1'
+pod 'AppLovinSDK','12.5.0'
 
 pod 'AppLovinMediationAmazonAdMarketplaceAdapter', '5.3.0.0'
 pod 'AmazonPublisherServicesSDK', '5.3.0'
